@@ -13,6 +13,7 @@ public class MockModelService implements IMockModelService {
 	IMockModelHibernateDao mockModelHibernateDao;
 	
 	public MockModelService(){
+		mockModelHibernateDao=new MockMoelDao();
 	}
 	
 	
