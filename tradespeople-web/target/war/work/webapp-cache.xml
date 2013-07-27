@@ -4,6 +4,7 @@
       <string>currentBuild</string>
       <path-set>
         <pathsSet class="linked-hash-set">
+          <string>NewFile.html</string>
           <string>WEB-INF/appContext.xml</string>
           <string>WEB-INF/generalRest-servlet.xml</string>
           <string>WEB-INF/log4j.xml</string>
