@@ -5,6 +5,7 @@
       <path-set>
         <pathsSet class="linked-hash-set">
           <string>WEB-INF/appContext.xml</string>
+          <string>WEB-INF/generalRest-servlet.xml</string>
           <string>WEB-INF/log4j.xml</string>
           <string>WEB-INF/Mail-Context.xml</string>
           <string>WEB-INF/web.xml</string>

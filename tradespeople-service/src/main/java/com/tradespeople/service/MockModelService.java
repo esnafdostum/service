@@ -2,20 +2,20 @@ package com.tradespeople.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.dao.IMockModelHibernateDao;
 import com.tradespeople.dao.MockMoelDao;
 import com.tradespeople.model.MockModel;
 
+@Service
 public class MockModelService implements IMockModelService {
 
-	IMockModelHibernateDao mockModelHibernateDao;
-	
-	public MockModelService(){
-		mockModelHibernateDao=new MockMoelDao();
-	}
-	
+	@Autowired
+	private transient IMockModelHibernateDao mockModelHibernateDao;
 	
 	public List<MockModel> getMockModels() throws TradesPeopleServiceException{
 		try {
@@ -25,6 +25,8 @@ public class MockModelService implements IMockModelService {
 		}
 	}
 
-	
+	public void setMockModelHibernateDao(IMockModelHibernateDao mockModelHibernateDao) {
+		this.mockModelHibernateDao = mockModelHibernateDao;
+	}
 	
 }
