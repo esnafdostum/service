@@ -7,14 +7,6 @@ public class MockModelResponse extends BaseResponse {
 	
 	private Long id;
 	private String name;
-	
-	public MockModelResponse(MockModel mockModel){
-		this.id=mockModel.getId();
-		this.name=mockModel.getName();
-	}
-	
-	public MockModelResponse() {
-	}
 
 	public Long getId() {
 		return id;

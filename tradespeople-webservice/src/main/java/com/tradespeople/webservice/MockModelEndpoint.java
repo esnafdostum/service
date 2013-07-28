@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tradespeople.json.response.MockModelResponse;
+import com.tradespeople.mapper.MockModelResponseBuilder;
 import com.tradespeople.model.MockModel;
 import com.tradespeople.service.IMockModelService;
 import com.tradespeople.utils.ApiConstants;
@@ -32,7 +33,7 @@ public class MockModelEndpoint implements IMockModelEndPoint {
 	public MockModelResponse detailMockModel(@PathVariable Long mockModelId){
 		for (MockModel model : mockModelService.getMockModels()) {
 			if (model.getId().equals(mockModelId)) {
-				return new MockModelResponse(model);
+				return new MockModelResponseBuilder(model).build();
 			}
 		}
 		MockModelResponse response =new MockModelResponse();
