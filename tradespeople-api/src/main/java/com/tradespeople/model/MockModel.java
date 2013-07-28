@@ -1,6 +1,8 @@
 package com.tradespeople.model;
 
-public class MockModel {
+import com.tradespeople.common.api.BaseModel;
+
+public class MockModel extends BaseModel {
 	
 	private String name;
 	private Long id;
