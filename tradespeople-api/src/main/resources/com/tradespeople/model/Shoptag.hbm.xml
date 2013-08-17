@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 15, 2013 6:54:29 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Shoptag" table="shoptag" catalog="tradesman">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="shop" class="Shop" fetch="select">
+            <column name="SHOPID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tag" class="Tag" fetch="select">
+            <column name="TAGID" not-null="true" />
+        </many-to-one>
+        <property name="createddate" type="date">
+            <column name="CREATEDDATE" length="0" />
+        </property>
+        <property name="updateddate" type="date">
+            <column name="UPDATEDDATE" length="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -12,7 +12,6 @@
 		<module>tradespeople-service</module>
 		<module>tradespeople-webservice</module>
 		<module>tradespeople-grid</module>
-		<module>tradespeople-web</module>
 	</modules>
 	<properties>
 		<spring.version>3.0.5.RELEASE</spring.version>

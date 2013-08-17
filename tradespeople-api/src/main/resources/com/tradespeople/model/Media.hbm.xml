@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 15, 2013 6:54:29 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Media" table="media" catalog="tradesman">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="type" type="byte">
+            <column name="TYPE" not-null="true" />
+        </property>
+        <property name="path" type="string">
+            <column name="PATH" length="65535" not-null="true" />
+        </property>
+        <property name="createddate" type="date">
+            <column name="CREATEDDATE" length="0" />
+        </property>
+        <property name="updateddate" type="date">
+            <column name="UPDATEDDATE" length="0" />
+        </property>
+        <property name="status" type="java.lang.Byte">
+            <column name="STATUS" />
+        </property>
+        <property name="creatoruserid" type="java.lang.Long">
+            <column name="CREATORUSERID" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="65535" />
+        </property>
+        <set name="medialookups" table="medialookup" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MEDIAID" not-null="true" />
+            </key>
+            <one-to-many class="Medialookup" />
+        </set>
+    </class>
+</hibernate-mapping>

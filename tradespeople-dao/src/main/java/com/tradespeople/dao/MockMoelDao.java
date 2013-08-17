@@ -5,17 +5,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.tradespeople.common.api.GenericDao;
 import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.model.MockModel;
 
 @Repository
 public class MockMoelDao /*extends GenericDao<MockModel, Long>*/ implements IMockModelHibernateDao {
 
-	public MockMoelDao() {
-		//super(MockModel.class);
-	}
-
+	
 	public List<MockModel> getMockModels() throws TradesPeopleDaoException{
 	
 		MockModel model1=new MockModel();

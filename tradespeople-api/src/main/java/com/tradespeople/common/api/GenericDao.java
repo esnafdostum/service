@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 
@@ -15,6 +16,7 @@ implements GenericDaoInterface<T, Serializable>
 {
 
 	@Autowired
+	@Qualifier("sessionFactory.TRADESPEOPLE")
 	public void sessionFactorySet(SessionFactory sessionFactory)
 	{
 		this.setSessionFactory(sessionFactory);
