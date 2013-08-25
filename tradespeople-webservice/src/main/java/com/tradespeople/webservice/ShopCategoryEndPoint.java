@@ -12,7 +12,7 @@ import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.json.request.ShopCategoryRequest;
 import com.tradespeople.service.IShopCategoryService;
 
-@Controller("shopcategory")
+@Controller("/shopcategory")
 public class ShopCategoryEndPoint extends BaseController implements IShopCategoryEndPoint {
 
 	@Autowired
