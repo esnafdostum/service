@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://activemq.apache.org/schema/core/activemq-core.xsd
+	http://www.springframework.org/schema/jms 
+    http://www.springframework.org/schema/jms/spring-jms.xsd
+    http://www.springframework.org/schema/jms/spring-jms-3.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-3.0.xsd"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx">
+
+	<!--bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" 
+		/> <property name="locations"> <list> <value>file:${texan.configuration.base}/texan-acq-batch/application.properties</value> 
+		<value>file:${texan.configuration.base}/texan-acq-batch/hibernate.properties</value> 
+		<value>file:${texan.configuration.base}/texan-acq-batch/texan.acq.batch.properties</value> 
+		<value>file:${texan.configuration.base}/texan-acq-batch/texan.acq.properties</value> 
+		</list> </property> </bean -->
+
+	<!--bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean" 
+		lazy-init="false"> <property name="staticMethod" value="org.apache.log4j.xml.DOMConfigurator.configureAndWatch" 
+		/> <property name="arguments"> <list> <value type="java.lang.String">${log4j.configXml}</value> 
+		<value type="java.lang.Long">${log4j.watchPeriod}</value> </list> </property> 
+		</bean -->
+
+	<context:annotation-config />
+	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
+
+
+	<context:component-scan base-package="com.tradespeople"></context:component-scan>
+	<tx:annotation-driven transaction-manager="transactionManager.TRADESPEOPLE" />
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver" />
+
+	<!-- DATASOURCE, SESSIONFACTORY AND HIBERNATE MAPPINGS -->
+
+	<!--bean id="dataSource.TRADESPEOPLE" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="java:comp/env/jdbc/TRADESPEOPLE"/> <property 
+		name="lookupOnStartup" value="true"/> <property name="proxyInterface" value="javax.sql.DataSource"/> 
+		</bean -->
+
+	<bean id="DataSource.TRADESPEOPLE"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/tradespeople" />
+		<property name="username" value="root" />
+		<property name="password" value="002210" />
+	</bean>
+
+	<bean id="sessionFactory.TRADESPEOPLE"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="DataSource.TRADESPEOPLE" />
+		<property name="packagesToScan" value="com.tradespeople.model" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="suppressClose">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<constructor-arg>
+			<ref bean="sessionFactory.TRADESPEOPLE" />
+		</constructor-arg>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="TransactionManager.TRADESPEOPLE" />
+	<bean id="TransactionManager.TRADESPEOPLE"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory.TRADESPEOPLE" />
+	</bean>
+
+	<!--import resource="applicationContext-grid.xml" / -->
+
+
+</beans>

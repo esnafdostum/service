@@ -13,6 +13,7 @@ import com.tradespeople.dao.ITagHibernateDao;
 import com.tradespeople.json.request.TagRequest;
 import com.tradespeople.model.Tag;
 import com.tradespeople.model.builder.TagBuilder;
+import com.tradespeople.utils.ApiUtils;
 
 @Service
 public class TagService implements ITagService{
@@ -37,13 +38,14 @@ public class TagService implements ITagService{
 	public void update(TagRequest request) throws TradesPeopleServiceException {
 		try {
 			Tag tag = builder.buildFor(request);
+			if (!tag.isPersisted()) {
+				ApiUtils.throwPersistedException();
+			}
 			dao.update(tag);
 		} catch (TradesPeopleDaoException e) {
 			new TradesPeopleServiceException(e);
 		}
 	}
-	
-
 	
 	@Override
 	public List<Tag> listTags(PaginableRequest paginableRequest) throws TradesPeopleServiceException {

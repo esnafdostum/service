@@ -16,6 +16,7 @@ import com.tradespeople.model.Shop;
 import com.tradespeople.model.Shopcategory;
 import com.tradespeople.model.builder.ShopCategoryBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
+import com.tradespeople.utils.ApiUtils;
 
 @Service
 public class ShopCategoryService implements IShopCategoryService {
@@ -28,9 +29,9 @@ public class ShopCategoryService implements IShopCategoryService {
 
 	@Transactional 
 	public void create(ShopCategoryRequest request)throws TradesPeopleServiceException {
-		Shopcategory shopcategory=shopCategoryBuilder.buildFor(request);
-		shopcategory.setCreateddate(new Date());
 		try {
+			Shopcategory shopcategory=shopCategoryBuilder.buildFor(request);
+			shopcategory.setCreateddate(new Date());
 			shopCategoryDao.save(shopcategory);
 		} catch (TradesPeopleDaoException e) {
 			throw new TradesPeopleServiceException(e);
@@ -61,6 +62,9 @@ public class ShopCategoryService implements IShopCategoryService {
 		Shopcategory shopcategory=shopCategoryBuilder.buildFor(request);
 		shopcategory.setUpdateddate(new Date());
 		try {
+			if (!shopcategory.isPersisted()) {
+			    ApiUtils.throwPersistedException();
+			}
 			shopCategoryDao.update(shopcategory);
 		} catch (TradesPeopleDaoException e) {
 			throw new TradesPeopleServiceException(e);

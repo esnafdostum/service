@@ -17,9 +17,9 @@ public class ShopCollectionResponse extends BaseResponse {
 		getResponses().add(shopResponse);
 	}
 
-	public ShopCollectionResponse failResponse() {
+	public ShopCollectionResponse failResponse(String errorMessage) {
 		ShopCollectionResponse response = new ShopCollectionResponse();
-		BaseResponse fail = BaseResponse.fail();
+		BaseResponse fail = BaseResponse.fail(errorMessage);
 		response.setResponseStatus(fail.getResponseStatus());
 		response.setErrorCode(fail.getErrorCode());
 		response.setErrorMessage(fail.getErrorMessage());

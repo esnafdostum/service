@@ -32,7 +32,7 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 			tagService.create(request);
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
-			return BaseResponse.fail();
+			return BaseResponse.fail(e.getMessage());
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 			tagService.update(request);
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
-			return BaseResponse.fail();
+			return BaseResponse.fail(e.getMessage());
 		}
 	}
 	
@@ -59,7 +59,7 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 			}
 			return response;
 		} catch (TradesPeopleServiceException e) {
-			return response.failResponse(); 
+			return response.failResponse(e.getMessage()); 
 		}
 	}
 

@@ -40,6 +40,4 @@ public class PaginationSearchCriteria {
 		this.total = total;
 	}
 	
-	
-	
 }

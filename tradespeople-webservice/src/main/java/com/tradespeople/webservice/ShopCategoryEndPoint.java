@@ -41,7 +41,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 			shopCategoryService.create(request);
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
-			return BaseResponse.fail();
+			return BaseResponse.fail(e.getMessage());
 		}
 	}
 	
@@ -52,7 +52,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 			shopCategoryService.update(request);
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
-			return BaseResponse.fail();
+			return BaseResponse.fail(e.getMessage());
 		}
 	}
 	
@@ -67,7 +67,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 			}
 			return response;
 		} catch (TradesPeopleServiceException e) {
-			return new ShopCollectionResponse().failResponse();
+			return new ShopCollectionResponse().failResponse(e.getMessage());
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 			}
 			return response;
 		} catch (TradesPeopleServiceException e) {
-			return new ShopCategoryCollectionResponse().failResponse();
+			return new ShopCategoryCollectionResponse().failResponse(e.getMessage());
 		}
 	}
 	

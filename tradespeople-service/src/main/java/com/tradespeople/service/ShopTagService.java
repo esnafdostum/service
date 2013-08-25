@@ -63,7 +63,7 @@ public class ShopTagService implements IShopTagService {
 		return null;
 	}
 	
-	@Override
+	@Transactional
 	public void deleteTagsFromShop(ShopTagRequest request) throws TradesPeopleServiceException {
 		Long shopId=request.getShopId();
 		Shop shop=new Shop();

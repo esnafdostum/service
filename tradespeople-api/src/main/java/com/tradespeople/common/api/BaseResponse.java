@@ -30,9 +30,10 @@ public class BaseResponse {
 		BaseResponse  base=new BaseResponse();
 		return base;
 	}
-	public static BaseResponse fail() {
+	public static BaseResponse fail(String errorMessage) {
 		BaseResponse failBase=new BaseResponse();
 		failBase.setResponseStatus(ApiConstants.Enums.ResponseStatus.Fail);
+		failBase.setErrorMessage(errorMessage);
 		return failBase;
 	}
 	public ApiConstants.Enums.ResponseStatus getResponseStatus() {
