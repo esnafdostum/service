@@ -14,6 +14,7 @@ import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.dao.IShopTagHibernateDao;
 import com.tradespeople.json.request.ShopTagRequest;
 import com.tradespeople.json.request.TagRequest;
+import com.tradespeople.model.Shop;
 import com.tradespeople.model.Shoptag;
 import com.tradespeople.model.Tag;
 import com.tradespeople.model.builder.ShopTagBuilder;
@@ -39,10 +40,14 @@ public class ShopTagService implements IShopTagService {
 	@Transactional
 	public void addTagsToShop(ShopTagRequest request) throws TradesPeopleServiceException {
 		Long shopId=request.getShopId();
+		Shop shop=new Shop();
+		shop.setId(shopId);
 		for (TagRequest tagRequest : request.getTags()) {
 			
-			if (!isExistTagsFor(shopId,tagRequest.getId())) {
+			if (isNotExistTagsFor(shopId,tagRequest.getId())) {
 				Shoptag shopTag=new Shoptag();
+				shopTag.setTag(tagBuilder.buildFor(tagRequest));
+				shopTag.setShop(shop);
 				shopTag.setCreateddate(new Date());
 				try {
 					shopTagDao.create(shopTag);
@@ -54,7 +59,26 @@ public class ShopTagService implements IShopTagService {
 		}
 	}
 	
-	private boolean isExistTagsFor(Long shopId, Long id) {
+	@Override
+	public void deleteTagsFromShop(ShopTagRequest request) throws TradesPeopleServiceException {
+		Long shopId=request.getShopId();
+		Shop shop=new Shop();
+		shop.setId(shopId);
+		List<Tag> removedTags=new ArrayList<Tag>();
+		
+		for (TagRequest tagRequest : request.getTags()) {
+			removedTags.add(tagBuilder.buildFor(tagRequest));
+		}
+		
+		try {
+			shopTagDao.removeTagsFromShop(shop,removedTags);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+		
+	}
+	
+	private boolean isNotExistTagsFor(Long shopId, Long id) {
 		// TODO Auto-generated method stub
 		return false;
 	}

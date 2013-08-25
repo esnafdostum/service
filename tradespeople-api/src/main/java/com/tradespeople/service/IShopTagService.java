@@ -12,5 +12,7 @@ public interface IShopTagService {
 	public List<Tag> listShopTags(PaginableRequest request, Long shopId) throws TradesPeopleServiceException ;
 
 	public void addTagsToShop(ShopTagRequest request)  throws TradesPeopleServiceException;
+
+	public void deleteTagsFromShop(ShopTagRequest request) throws TradesPeopleServiceException;
 	
 }

@@ -35,7 +35,6 @@ public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint 
 				response.add(new TagResponseBuilder().build(tag));
 			}
 			return response;
-			
 		} catch (TradesPeopleServiceException e) {
 			return new TagCollectionResponse().failResponse();
 		}
@@ -46,6 +45,18 @@ public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint 
 		
 		try {
 			shopTagService.addTagsToShop(request);
+			return BaseResponse.successful();
+		} catch (TradesPeopleServiceException e) {
+			return BaseResponse.fail();
+		}
+		
+	}
+	
+	@RequestMapping("/deletetagsfromshop")
+	public BaseResponse deleteTagsFromShop(@RequestBody ShopTagRequest request){
+		
+		try {
+			shopTagService.deleteTagsFromShop(request);
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail();
