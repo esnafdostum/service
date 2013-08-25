@@ -1,7 +1,6 @@
 package com.tradespeople.json.response;
 
 import com.tradespeople.common.api.BaseResponse;
-import com.tradespeople.model.MockModel;
 
 public class MockModelResponse extends BaseResponse {
 	

@@ -1,6 +1,6 @@
 package com.tradespeople.common.exception;
 
-public class TradesPeopleDaoException extends RuntimeException {
+public class TradesPeopleDaoException extends Exception {
 
 	private static final long serialVersionUID = 784461041142286856L;
 	

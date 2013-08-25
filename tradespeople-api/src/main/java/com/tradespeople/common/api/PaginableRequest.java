@@ -1,6 +1,6 @@
 package com.tradespeople.common.api;
 
-public class PaginableRequest extends BaseRequest {
+public abstract class PaginableRequest extends BaseRequest {
 
 	private PaginationRequestPart paginationRequestPart;
 	
