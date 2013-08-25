@@ -4,16 +4,19 @@ public class PaginationRequestPart {
 
 	public enum PaginationCount {
 		ONE("1"), TEN("10"), TWENTY("20"), FIFTY("50"), HUNDRED("100"), ALL("0");
-		public String count;
+		private String count;
 		PaginationCount() {
 		}
 		PaginationCount(String count) {
 			this.count = count;
 		}
+		public Integer getCount() {
+			return Integer.valueOf(count);
+		}
 	}
 
 	private int page;
-	private PaginationCount count;
+	private PaginationCount paginationCount;
 	private int total;
 
 	public int getPage() {
@@ -32,12 +35,12 @@ public class PaginationRequestPart {
 		this.total = total;
 	}
 
-	public PaginationCount getCount() {
-		return count;
+	public PaginationCount getPaginationCount() {
+		return paginationCount;
 	}
 
 	public void setCount(PaginationCount count) {
-		this.count = count;
+		this.paginationCount = count;
 	}
 
 }

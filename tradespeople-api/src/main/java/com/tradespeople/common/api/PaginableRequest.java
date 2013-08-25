@@ -1,7 +1,5 @@
 package com.tradespeople.common.api;
 
-import com.tradespeople.common.api.PaginationRequestPart.PaginationCount;
-
 public abstract class PaginableRequest extends BaseRequest {
 
 	private PaginationRequestPart paginationRequestPart;
@@ -14,8 +12,8 @@ public abstract class PaginableRequest extends BaseRequest {
 		return paginationRequestPart.getPage();
 	}
 	
-	public PaginationCount getCount(){
-		return paginationRequestPart.getCount();
+	public Integer getCount(){
+		return paginationRequestPart.getPaginationCount().getCount();
 	}
 	
 	public int getTotal(){
