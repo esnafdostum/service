@@ -47,9 +47,9 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 		}
 	}
 	
-	@RequestMapping("/allTags")
+	@RequestMapping("/tags")
 	@ResponseBody
-	public TagCollectionResponse allTags(@RequestBody PaginableRequest paginableRequest){
+	public TagCollectionResponse tags(@RequestBody PaginableRequest paginableRequest){
 		TagCollectionResponse response=new TagCollectionResponse();
 		try {
 			

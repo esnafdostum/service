@@ -13,9 +13,12 @@ import com.tradespeople.common.api.BaseResponse;
 import com.tradespeople.common.api.PaginableRequest;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.json.request.ShopTagRequest;
+import com.tradespeople.json.response.ShopCollectionResponse;
 import com.tradespeople.json.response.TagCollectionResponse;
+import com.tradespeople.model.Shop;
 import com.tradespeople.model.Tag;
-import com.tradespeople.model.builder.TagResponseBuilder;
+import com.tradespeople.model.builder.ShopBuilder;
+import com.tradespeople.model.builder.TagBuilder;
 import com.tradespeople.service.IShopTagService;
 
 @Controller
@@ -25,6 +28,13 @@ public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint 
 	@Autowired
 	private IShopTagService shopTagService;
 	
+	@Autowired
+	private TagBuilder tagBuilder;
+	
+	@Autowired
+	private ShopBuilder shopBuilder;
+	
+	
 	@RequestMapping("/tagsbyshop/{shopId}")
 	public TagCollectionResponse tagsByShop(@RequestBody PaginableRequest request,@PathVariable("shopId") Long shopId){
 		
@@ -32,11 +42,26 @@ public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint 
 			List<Tag> tags=shopTagService.listShopTags(request,shopId);
 			TagCollectionResponse response=new TagCollectionResponse();
 			for (Tag tag : tags) {
-				response.add(new TagResponseBuilder().build(tag));
+				response.add(tagBuilder.buildResponse(tag));
 			}
 			return response;
 		} catch (TradesPeopleServiceException e) {
 			return new TagCollectionResponse().failResponse();
+		}
+	}
+	
+	@RequestMapping("/shopsbytag/{tagId}")
+	public ShopCollectionResponse shopsByTag(@RequestBody PaginableRequest request,@PathVariable("tagId") Long tagid){
+		
+		try {
+			List<Shop> shops=shopTagService.listShopsByTag(request,tagid);
+			ShopCollectionResponse response=new ShopCollectionResponse();
+			for (Shop shop : shops) {
+				response.add(shopBuilder.buildResponse(shop));
+			}
+			return response;
+		} catch (TradesPeopleServiceException e) {
+			return new ShopCollectionResponse().failResponse();
 		}
 	}
 	
@@ -66,6 +91,14 @@ public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint 
 
 	public void setShopTagService(IShopTagService shopTagService) {
 		this.shopTagService = shopTagService;
+	}
+
+	public void setTagBuilder(TagBuilder tagBuilder) {
+		this.tagBuilder = tagBuilder;
+	}
+
+	public void setShopBuilder(ShopBuilder shopBuilder) {
+		this.shopBuilder = shopBuilder;
 	}
 
 }

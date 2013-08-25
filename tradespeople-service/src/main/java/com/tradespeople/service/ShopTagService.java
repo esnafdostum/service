@@ -55,8 +55,12 @@ public class ShopTagService implements IShopTagService {
 					throw new TradesPeopleServiceException(e);
 				}
 			}
-			
 		}
+	}
+	
+	@Override
+	public List<Shop> listShopsByTag(PaginableRequest request, Long tagid) throws TradesPeopleServiceException {
+		return null;
 	}
 	
 	@Override
@@ -69,7 +73,6 @@ public class ShopTagService implements IShopTagService {
 		for (TagRequest tagRequest : request.getTags()) {
 			removedTags.add(tagBuilder.buildFor(tagRequest));
 		}
-		
 		try {
 			shopTagDao.removeTagsFromShop(shop,removedTags);
 		} catch (TradesPeopleDaoException e) {
