@@ -6,11 +6,11 @@ public class BaseResponse {
 	
 	private ApiConstants.Enums.ResponseErrorCode errorCode;
 	private String errorMessage;
-	private ApiConstants.Enums.ResponseStatus status;
+	private ApiConstants.Enums.ResponseStatus responseStatus;
 	
 	public BaseResponse(){
 		this.errorCode=ApiConstants.Enums.ResponseErrorCode.NoError;
-		this.setStatus(ApiConstants.Enums.ResponseStatus.SuccessFull);
+		this.setResponseStatus(ApiConstants.Enums.ResponseStatus.SuccessFull);
 		this.errorMessage="";
 	}
 	public String getErrorMessage() {
@@ -32,14 +32,14 @@ public class BaseResponse {
 	}
 	public static BaseResponse fail() {
 		BaseResponse failBase=new BaseResponse();
-		failBase.setStatus(ApiConstants.Enums.ResponseStatus.Fail);
+		failBase.setResponseStatus(ApiConstants.Enums.ResponseStatus.Fail);
 		return failBase;
 	}
-	public ApiConstants.Enums.ResponseStatus getStatus() {
-		return status;
+	public ApiConstants.Enums.ResponseStatus getResponseStatus() {
+		return responseStatus;
 	}
-	public void setStatus(ApiConstants.Enums.ResponseStatus status) {
-		this.status = status;
+	public void setResponseStatus(ApiConstants.Enums.ResponseStatus status) {
+		this.responseStatus = status;
 	}
 
 }

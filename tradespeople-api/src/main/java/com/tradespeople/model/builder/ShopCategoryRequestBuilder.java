@@ -27,8 +27,12 @@ public class ShopCategoryRequestBuilder extends RequestBuilder<ShopCategoryReque
 
 	@Override
 	public ShopCategoryRequest build(Shopcategory model) {
-		// TODO Auto-generated method stub
-		return null;
+		ShopCategoryRequest shopcategory=new ShopCategoryRequest();
+		shopcategory.setId(model.getId());
+		shopcategory.setMediapath(model.getMediapath());
+		shopcategory.setStatus(model.getStatus());
+		shopcategory.setName(model.getName());
+		return shopcategory;
 	}
 
 }

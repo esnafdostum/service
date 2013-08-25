@@ -28,7 +28,7 @@ public class TagCollectionResponse extends BaseResponse {
 	public TagCollectionResponse failResponse(){
 		TagCollectionResponse response=new TagCollectionResponse();
 		BaseResponse fail=BaseResponse.fail();
-		response.setStatus(fail.getStatus());
+		response.setResponseStatus(fail.getResponseStatus());
 		response.setErrorCode(fail.getErrorCode());
 		response.setErrorMessage(fail.getErrorMessage());
 		return response;

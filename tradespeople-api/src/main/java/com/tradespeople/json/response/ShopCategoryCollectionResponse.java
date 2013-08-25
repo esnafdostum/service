@@ -20,7 +20,7 @@ public class ShopCategoryCollectionResponse extends BaseResponse {
 	public ShopCategoryCollectionResponse failResponse() {
 		ShopCategoryCollectionResponse response = new ShopCategoryCollectionResponse();
 		BaseResponse fail = BaseResponse.fail();
-		response.setStatus(fail.getStatus());
+		response.setResponseStatus(fail.getResponseStatus());
 		response.setErrorCode(fail.getErrorCode());
 		response.setErrorMessage(fail.getErrorMessage());
 		return response;

@@ -11,20 +11,31 @@ public class ShopCategoryResponseBuilder extends ResponseBuilder<ShopCategoryRes
 
 	@Override
 	public ShopCategoryResponse build() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Shopcategory build(ShopCategoryResponse obj) {
-		// TODO Auto-generated method stub
-		return null;
+		Shopcategory model=new Shopcategory();
+		model.setId(obj.getId());
+		model.setName(obj.getName());
+		model.setMediapath(obj.getMediapath());
+		model.setStatus(obj.getStatus());
+		model.setUpdateddate(obj.getUpdateddate());
+		model.setCreateddate(obj.getCreatedDate());
+		return model;
 	}
 
 	@Override
 	public ShopCategoryResponse build(Shopcategory model) {
-		// TODO Auto-generated method stub
-		return null;
+		ShopCategoryResponse response=new ShopCategoryResponse();
+		response.setId(model.getId());
+		response.setName(model.getName());
+		response.setMediapath(model.getMediapath());
+		response.setStatus(model.getStatus());
+		response.setUpdateddate(model.getUpdateddate());
+		response.setCreatedDate(model.getCreateddate());
+		return response;
 	}
 
 }
