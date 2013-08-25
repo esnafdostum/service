@@ -22,7 +22,7 @@ import com.tradespeople.model.builder.TagBuilder;
 import com.tradespeople.service.IShopTagService;
 
 @Controller
-@RequestMapping("/shoptags") 
+@RequestMapping("/shoptag") 
 public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint {
 	
 	@Autowired
