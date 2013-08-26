@@ -17,14 +17,20 @@ public class RoleRequestBuilder extends RequestBuilder<RoleRequest, Role> {
 
 	@Override
 	public Role build(RoleRequest obj) {
-		// TODO Auto-generated method stub
-		return null;
+		Role role=new Role();
+		role.setName(obj.getName());
+		role.setId(obj.getId());
+		role.setStatus(obj.getStatus());
+		return role;
 	}
 
 	@Override
 	public RoleRequest build(Role model) {
-		// TODO Auto-generated method stub
-		return null;
+		RoleRequest request=new RoleRequest();
+		request.setName(model.getName());
+		request.setId(model.getId());
+		request.setStatus(model.getStatus());
+		return request;
 	}
 
 }

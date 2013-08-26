@@ -6,18 +6,12 @@ import com.tradespeople.common.api.BaseResponse;
 
 public class RoleResponse extends BaseResponse {
 
-	private String id;
+	private Long id;
 	private Date updateddate;
 	private Date createddate;
 	private String name;
 	private Byte status;
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public Date getUpdateddate() {
 		return updateddate;
 	}
@@ -41,5 +35,11 @@ public class RoleResponse extends BaseResponse {
 	}
 	public void setStatus(Byte status) {
 		this.status = status;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

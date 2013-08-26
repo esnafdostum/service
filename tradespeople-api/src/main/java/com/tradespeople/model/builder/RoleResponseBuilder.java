@@ -16,12 +16,24 @@ public class RoleResponseBuilder extends ResponseBuilder<RoleResponse, Role> {
 
 	@Override
 	public Role build(RoleResponse obj) {
-		return null;
+		Role role=new Role();
+		role.setCreateddate(obj.getCreateddate());
+		role.setId(obj.getId());
+		role.setName(obj.getName());
+		role.setStatus(obj.getStatus());
+		role.setUpdateddate(obj.getUpdateddate());
+		return role;		
 	}
 
 	@Override
 	public RoleResponse build(Role model) {
-		return null;
+		RoleResponse response=new RoleResponse();
+		response.setCreateddate(model.getCreateddate());
+		response.setId(model.getId());
+		response.setName(model.getName());
+		response.setStatus(model.getStatus());
+		response.setUpdateddate(model.getUpdateddate());
+		return response;
 	}
 
 }
