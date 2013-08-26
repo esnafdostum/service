@@ -17,6 +17,7 @@ import com.tradespeople.json.request.CommentRequest;
 import com.tradespeople.json.response.CommentCollectionResponse;
 import com.tradespeople.model.Comment;
 import com.tradespeople.model.builder.CommentBuilder;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.ICommentService;
 
 @Controller("/comment")
@@ -32,7 +33,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 	@ResponseBody
 	public BaseResponse save(@RequestBody CommentRequest request){
 		try {
-			commentService.create(request);
+			commentService.create(commentBuilder.buildFor(request));
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage());
@@ -43,7 +44,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 	@ResponseBody
 	public BaseResponse update(@RequestBody CommentRequest request){
 		try {
-			commentService.update(request);
+			commentService.update(commentBuilder.buildFor(request));
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage());
@@ -54,7 +55,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 	@ResponseBody
 	public BaseResponse delete(@RequestBody CommentRequest request){
 		try {
-			commentService.delete(request);
+			commentService.delete(commentBuilder.buildFor(request));
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage());
@@ -65,7 +66,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 	public CommentCollectionResponse tagsByShop(@RequestBody PaginableRequest request,@PathVariable("shopId") Long shopId){
 		
 		try {
-			List<Comment> comments=commentService.listShopComments(request,shopId);
+			List<Comment> comments=commentService.listShopComments(PaginationSearchCriteria.buildFor(request),shopId);
 			CommentCollectionResponse response=new CommentCollectionResponse();
 			for (Comment comment : comments) {
 				response.add(commentBuilder.buildResponse(comment));

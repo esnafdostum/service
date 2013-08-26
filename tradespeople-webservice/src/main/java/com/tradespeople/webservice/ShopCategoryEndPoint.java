@@ -20,6 +20,7 @@ import com.tradespeople.model.Shop;
 import com.tradespeople.model.Shopcategory;
 import com.tradespeople.model.builder.ShopBuilder;
 import com.tradespeople.model.builder.ShopCategoryBuilder;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.IShopCategoryService;
 
 @Controller("/shopcategory")
@@ -38,7 +39,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 	@ResponseBody
 	public BaseResponse save(@RequestBody ShopCategoryRequest request){
 		try {
-			shopCategoryService.create(request);
+			shopCategoryService.create(shopCategoryBuilder.buildFor(request));
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage());
@@ -49,7 +50,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 	@ResponseBody
 	public BaseResponse update(@RequestBody ShopCategoryRequest request){
 		try {
-			shopCategoryService.update(request);
+			shopCategoryService.update(shopCategoryBuilder.buildFor(request));
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage());
@@ -60,7 +61,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 	public ShopCollectionResponse shopsBy(@RequestBody PaginableRequest request,@PathVariable("categoryId") Long categoryId){
 		
 		try {
-			List<Shop> shops=shopCategoryService.listShopsByCategory(request,categoryId);
+			List<Shop> shops=shopCategoryService.listShopsByCategory(PaginationSearchCriteria.buildFor(request),categoryId);
 			ShopCollectionResponse response=new ShopCollectionResponse();
 			for (Shop shop : shops) {
 				response.add(shopBuilder.buildResponse(shop));
@@ -75,7 +76,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 	public ShopCategoryCollectionResponse categoriesBy(@RequestBody PaginableRequest request,@PathVariable("shopId") Long shopId){
 		
 		try {
-			List<Shopcategory> categories=shopCategoryService.listCategoriesByShop(request,shopId);
+			List<Shopcategory> categories=shopCategoryService.listCategoriesByShop(PaginationSearchCriteria.buildFor(request),shopId);
 			ShopCategoryCollectionResponse response=new ShopCategoryCollectionResponse();
 			for (Shopcategory shopCategory : categories) {
 				response.add(shopCategoryBuilder.buildResponse(shopCategory));
@@ -89,11 +90,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 	public void setShopCategoryService(IShopCategoryService shopCategoryService) {
 		this.shopCategoryService = shopCategoryService;
 	}
-
-	public ShopBuilder getShopBuilder() {
-		return shopBuilder;
-	}
-
+	
 	public void setShopBuilder(ShopBuilder shopBuilder) {
 		this.shopBuilder = shopBuilder;
 	}

@@ -16,6 +16,7 @@ import com.tradespeople.json.request.TagRequest;
 import com.tradespeople.json.response.TagCollectionResponse;
 import com.tradespeople.model.Tag;
 import com.tradespeople.model.builder.TagBuilder;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.ITagService;
 
 @Controller
@@ -25,11 +26,14 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 	@Autowired 
 	private ITagService tagService;
 	
+	@Autowired
+	private TagBuilder tagBuilder;
+	
 	@RequestMapping("/create")
 	@ResponseBody
 	public BaseResponse save(@RequestBody TagRequest request){
 		try {
-			tagService.create(request);
+			tagService.create(tagBuilder.buildFor(request));
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage());
@@ -40,7 +44,7 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 	@ResponseBody
 	public BaseResponse update(@RequestBody TagRequest request){
 		try {
-			tagService.update(request);
+			tagService.update(tagBuilder.buildFor(request));
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage());
@@ -53,7 +57,7 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 		TagCollectionResponse response=new TagCollectionResponse();
 		try {
 			
-			List<Tag> tags= tagService.listTags(paginableRequest);
+			List<Tag> tags= tagService.listTags(PaginationSearchCriteria.buildFor(paginableRequest));
 			for (Tag tag : tags) {
 				response.add(new TagBuilder().buildResponse(tag));
 			}
@@ -65,6 +69,10 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 
 	public void setTagService(ITagService tagService) {
 		this.tagService = tagService;
+	}
+
+	public void setTagBuilder(TagBuilder tagBuilder) {
+		this.tagBuilder = tagBuilder;
 	} 
 	
 }

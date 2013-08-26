@@ -7,13 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tradespeople.common.api.PaginableRequest;
 import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.dao.ICommentHibernateDao;
-import com.tradespeople.json.request.CommentRequest;
 import com.tradespeople.model.Comment;
-import com.tradespeople.model.builder.CommentBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.utils.ApiUtils;
 
@@ -23,14 +20,9 @@ public class CommentService implements ICommentService {
 	@Autowired
 	private ICommentHibernateDao commentHibernateDao;
 	
-	@Autowired
-	private CommentBuilder commentBuilder;
-	
-	
 	@Transactional
-	public void create(CommentRequest request)throws TradesPeopleServiceException {
+	public void create(Comment comment)throws TradesPeopleServiceException {
 		try {
-			Comment comment=commentBuilder.buildFor(request);
 			comment.setCreateddate(new Date());
 			commentHibernateDao.create(comment);
 		} catch (TradesPeopleDaoException e) {
@@ -39,9 +31,8 @@ public class CommentService implements ICommentService {
 	}
 	
 	@Transactional
-	public void update(CommentRequest request)throws TradesPeopleServiceException {
+	public void update(Comment comment)throws TradesPeopleServiceException {
 		try {
-			Comment comment=commentBuilder.buildFor(request);
 			if (!comment.isPersisted()) {
 				ApiUtils.throwPersistedException();
 			}
@@ -52,9 +43,8 @@ public class CommentService implements ICommentService {
 	}
 	
 	@Transactional
-	public void delete(CommentRequest request)throws TradesPeopleServiceException {
+	public void delete(Comment comment)throws TradesPeopleServiceException {
 		try {
-			Comment comment=commentBuilder.buildFor(request);
 			if (!comment.isPersisted()) {
 				ApiUtils.throwPersistedException();
 			}
@@ -66,14 +56,13 @@ public class CommentService implements ICommentService {
 	
 
 	@Transactional(readOnly=true)
-	public List<Comment> listShopComments(PaginableRequest request, Long shopId) throws TradesPeopleServiceException {
+	public List<Comment> listShopComments(PaginationSearchCriteria searchCriteria, Long shopId) throws TradesPeopleServiceException {
 		try {
-			return commentHibernateDao.listShopCategories(PaginationSearchCriteria.buildFor(request),shopId);
+			return commentHibernateDao.listShopCategories(searchCriteria,shopId);
 		} catch (TradesPeopleDaoException e) {
 			throw new TradesPeopleServiceException(e);
 		}
 	}
-
 	
 	public void setCommentHibernateDao(ICommentHibernateDao commentHibernateDao) {
 		this.commentHibernateDao = commentHibernateDao;

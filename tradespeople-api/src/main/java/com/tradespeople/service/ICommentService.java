@@ -2,19 +2,18 @@ package com.tradespeople.service;
 
 import java.util.List;
 
-import com.tradespeople.common.api.PaginableRequest;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
-import com.tradespeople.json.request.CommentRequest;
 import com.tradespeople.model.Comment;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 
 public interface ICommentService {
 
-	void create(CommentRequest request) throws TradesPeopleServiceException;
+	void create(Comment comment) throws TradesPeopleServiceException;
 
-	void update(CommentRequest request) throws TradesPeopleServiceException;
+	void update(Comment comment) throws TradesPeopleServiceException;
 
-	void delete(CommentRequest request) throws TradesPeopleServiceException;
+	void delete(Comment comment) throws TradesPeopleServiceException;
 
-	List<Comment> listShopComments(PaginableRequest request, Long shopId) throws TradesPeopleServiceException;
+	List<Comment> listShopComments(PaginationSearchCriteria searchCriteria, Long shopId) throws TradesPeopleServiceException;
 
 }

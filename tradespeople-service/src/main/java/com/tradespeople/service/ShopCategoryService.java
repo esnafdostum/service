@@ -7,14 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tradespeople.common.api.PaginableRequest;
 import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.dao.IShopCategoryHibernateDao;
-import com.tradespeople.json.request.ShopCategoryRequest;
 import com.tradespeople.model.Shop;
 import com.tradespeople.model.Shopcategory;
-import com.tradespeople.model.builder.ShopCategoryBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.utils.ApiUtils;
 
@@ -23,14 +20,10 @@ public class ShopCategoryService implements IShopCategoryService {
 
 	@Autowired
 	private IShopCategoryHibernateDao shopCategoryDao;
-	
-	@Autowired
-	private ShopCategoryBuilder shopCategoryBuilder; 
 
 	@Transactional 
-	public void create(ShopCategoryRequest request)throws TradesPeopleServiceException {
+	public void create(Shopcategory shopcategory)throws TradesPeopleServiceException {
 		try {
-			Shopcategory shopcategory=shopCategoryBuilder.buildFor(request);
 			shopcategory.setCreateddate(new Date());
 			shopCategoryDao.save(shopcategory);
 		} catch (TradesPeopleDaoException e) {
@@ -39,9 +32,9 @@ public class ShopCategoryService implements IShopCategoryService {
 	}
 	
 	@Transactional(readOnly=true)
-	public List<Shopcategory> listCategoriesByShop(PaginableRequest request,Long shopId) throws TradesPeopleServiceException {
+	public List<Shopcategory> listCategoriesByShop(PaginationSearchCriteria searchCriteria,Long shopId) throws TradesPeopleServiceException {
 		try {
-			return shopCategoryDao.listCategoriesByShop(PaginationSearchCriteria.buildFor(request),shopId);
+			return shopCategoryDao.listCategoriesByShop(searchCriteria,shopId);
 		} catch (TradesPeopleDaoException e) {
 			throw new TradesPeopleServiceException(e);
 		}
@@ -49,17 +42,16 @@ public class ShopCategoryService implements IShopCategoryService {
 	
 	
 	@Transactional(readOnly=true)
-	public List<Shop> listShopsByCategory(PaginableRequest request, Long categoryId) throws TradesPeopleServiceException {
+	public List<Shop> listShopsByCategory(PaginationSearchCriteria searchCriteria, Long categoryId) throws TradesPeopleServiceException {
 		try {
-			return shopCategoryDao.listShopsByCategory(PaginationSearchCriteria.buildFor(request),categoryId);
+			return shopCategoryDao.listShopsByCategory(searchCriteria,categoryId);
 		} catch (TradesPeopleDaoException e) {
 			throw new TradesPeopleServiceException(e);
 		}
 	}
 	
 	@Transactional
-	public void update(ShopCategoryRequest request)throws TradesPeopleServiceException {
-		Shopcategory shopcategory=shopCategoryBuilder.buildFor(request);
+	public void update(Shopcategory shopcategory)throws TradesPeopleServiceException {
 		shopcategory.setUpdateddate(new Date());
 		try {
 			if (!shopcategory.isPersisted()) {
@@ -73,10 +65,6 @@ public class ShopCategoryService implements IShopCategoryService {
 	
 	public void setShopCategoryDao(IShopCategoryHibernateDao shopCategoryDao) {
 		this.shopCategoryDao = shopCategoryDao;
-	}
-
-	public void setShopCategoryBuilder(ShopCategoryBuilder shopCategoryBuilder) {
-		this.shopCategoryBuilder = shopCategoryBuilder;
 	}
 
 }

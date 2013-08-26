@@ -19,6 +19,7 @@ import com.tradespeople.model.Shop;
 import com.tradespeople.model.Tag;
 import com.tradespeople.model.builder.ShopBuilder;
 import com.tradespeople.model.builder.TagBuilder;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.IShopTagService;
 
 @Controller
@@ -39,7 +40,7 @@ public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint 
 	public TagCollectionResponse tagsByShop(@RequestBody PaginableRequest request,@PathVariable("shopId") Long shopId){
 		
 		try {
-			List<Tag> tags=shopTagService.listShopTags(request,shopId);
+			List<Tag> tags=shopTagService.listShopTags(PaginationSearchCriteria.buildFor(request),shopId);
 			TagCollectionResponse response=new TagCollectionResponse();
 			for (Tag tag : tags) {
 				response.add(tagBuilder.buildResponse(tag));
@@ -54,7 +55,7 @@ public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint 
 	public ShopCollectionResponse shopsByTag(@RequestBody PaginableRequest request,@PathVariable("tagId") Long tagid){
 		
 		try {
-			List<Shop> shops=shopTagService.listShopsByTag(request,tagid);
+			List<Shop> shops=shopTagService.listShopsByTag(PaginationSearchCriteria.buildFor(request),tagid);
 			ShopCollectionResponse response=new ShopCollectionResponse();
 			for (Shop shop : shops) {
 				response.add(shopBuilder.buildResponse(shop));

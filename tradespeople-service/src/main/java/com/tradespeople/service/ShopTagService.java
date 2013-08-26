@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tradespeople.common.api.PaginableRequest;
 import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.dao.IShopTagHibernateDao;
@@ -19,6 +18,7 @@ import com.tradespeople.model.Shoptag;
 import com.tradespeople.model.Tag;
 import com.tradespeople.model.builder.ShopTagBuilder;
 import com.tradespeople.model.builder.TagBuilder;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 
 @Service
 public class ShopTagService implements IShopTagService {
@@ -33,7 +33,7 @@ public class ShopTagService implements IShopTagService {
 	private ShopTagBuilder shopTagBuilder; 
 	
 	@Override
-	public List<Tag> listShopTags(PaginableRequest request, Long shopId) throws TradesPeopleServiceException {
+	public List<Tag> listShopTags(PaginationSearchCriteria searchCriteria, Long shopId) throws TradesPeopleServiceException {
 		return new ArrayList<Tag>();
 	}
 
@@ -59,7 +59,7 @@ public class ShopTagService implements IShopTagService {
 	}
 	
 	@Override
-	public List<Shop> listShopsByTag(PaginableRequest request, Long tagid) throws TradesPeopleServiceException {
+	public List<Shop> listShopsByTag(PaginationSearchCriteria searchCriteria, Long tagid) throws TradesPeopleServiceException {
 		return null;
 	}
 	
@@ -81,6 +81,7 @@ public class ShopTagService implements IShopTagService {
 		
 	}
 	
+	@Transactional
 	private boolean isNotExistTagsFor(Long shopId, Long id) {
 		// TODO Auto-generated method stub
 		return false;
