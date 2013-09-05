@@ -27,13 +27,37 @@ public class UserService implements IUserService {
 			if (user.isNotExistAnyRole()) {
 				ApiUtils.throwUserRolesObligationException();
 			}
+			if (isExistUserName(user.getUsername(),user.getId())) {
+				ApiUtils.throwSameUserNameObligationException();
+			}
 			user.setCreateddate(new Date());
+			user.setToken(generateUniqueUserToken(user));
 			userDao.create(user);
 		} catch (TradesPeopleDaoException e) {
 			throw new TradesPeopleServiceException(e);
 		}
 	}
 	
+	@Transactional(readOnly=true)
+	private boolean isExistUserName(String username,Long id) throws TradesPeopleDaoException {
+		User user =userDao.getUserBy(username);
+		if (user==null) {
+			return false;
+		}
+		if (user.getUsername().equals(username) && user.getId().equals(id)) {
+			return false;
+		}
+		return true;
+	}
+
+	private String generateUniqueUserToken(User user) {
+		StringBuilder sb=new StringBuilder();
+		sb.append(user.getName());
+		sb.append(user.getUsername());
+		sb.append(user.getSurname());
+		return sb.toString();
+	}
+
 	@Transactional
 	public void update(User user)throws TradesPeopleServiceException {
 		try {
@@ -43,6 +67,12 @@ public class UserService implements IUserService {
 			if (user.isNotExistAnyRole()) {
 				ApiUtils.throwUserRolesObligationException();
 			}
+			if (isUserTokenChanged(user)) {
+				ApiUtils.throwUserTokenNotChangedObligationException();
+			}
+			if (isExistUserName(user.getUsername(),user.getId())) {
+				ApiUtils.throwSameUserNameObligationException();
+			}
 			user.setUpdateddate(new Date());
 			userDao.update(user);
 		} catch (TradesPeopleDaoException e) {
@@ -50,6 +80,15 @@ public class UserService implements IUserService {
 		}
 	}
 	
+	@Transactional(readOnly=true)
+	private boolean isUserTokenChanged(User user) throws TradesPeopleDaoException {
+		User updatedUser=userDao.getUserBy(user.getId());
+		if (user.getToken().equals(updatedUser.getToken())) {
+			return false;
+		}
+		return true;
+	}
+
 	public void setUserDao(IUserHibernateDao userDao) {
 		this.userDao = userDao;
 	}

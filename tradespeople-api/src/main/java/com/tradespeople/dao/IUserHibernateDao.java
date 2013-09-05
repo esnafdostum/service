@@ -9,4 +9,8 @@ public interface IUserHibernateDao {
 
 	void update(User user) throws TradesPeopleDaoException;
 
+	User getUserBy(Long id) throws TradesPeopleDaoException;
+
+	User getUserBy(String username) throws TradesPeopleDaoException;
+
 }

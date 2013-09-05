@@ -20,4 +20,16 @@ public class UserDao implements IUserHibernateDao {
 		
 	}
 
+	@Override
+	public User getUserBy(Long id) throws TradesPeopleDaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User getUserBy(String username) throws TradesPeopleDaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

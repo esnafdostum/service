@@ -3,17 +3,31 @@ package com.tradespeople.json.request;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.tradespeople.common.api.BaseRequest;
 
 public class UserRequest extends BaseRequest {
 
 	private Long id;
+	@NotNull
+	@NotBlank
 	private String username;
+	@NotNull
+	@NotBlank
 	private String password;
 	private String token;
 	private Byte status;
+	@NotNull
+	@NotBlank
 	private String name;
+	@NotNull
+	@NotBlank
 	private String surname;
+	@NotEmpty
 	private List<RoleRequest> roles=new ArrayList<RoleRequest>();
 	
 	public Long getId() {
