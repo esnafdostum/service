@@ -1,7 +1,9 @@
 package com.tradespeople.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -58,6 +60,40 @@ public class User extends BaseModel implements java.io.Serializable {
 		this.medialookups = medialookups;
 		this.shops = shops;
 		this.userroles = userroles;
+	}
+	
+	public List<Role> userRoles(){
+		List<Role> roles=new ArrayList<Role>();
+		for (Userrole userrole : userroles) {
+			roles.add(userrole.getRole());
+		}
+		return roles;
+	}
+	
+	public boolean isExistAnyRole(){
+		if (userroles==null) {
+			return false;
+		}else if (userroles.size()==0) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean isNotExistAnyRole() {
+		return !isExistAnyRole();
+	}
+	
+	public void addRole(Role role){
+		if (isNotExistsUserRoleFor(role)) {
+			Userrole userrole=new Userrole();
+			userrole.setUser(this);
+			userrole.setRole(role);
+			userroles.add(userrole);
+		}
+	}
+
+	private boolean isNotExistsUserRoleFor(Role role) {
+		return !userRoles().contains(role);
 	}
 
 	@Column(name = "USERNAME", nullable = false, length = 150)
