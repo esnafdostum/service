@@ -54,7 +54,7 @@ public class ShopCategoryService implements IShopCategoryService {
 	public void update(Shopcategory shopcategory)throws TradesPeopleServiceException {
 		shopcategory.setUpdateddate(new Date());
 		try {
-			if (!shopcategory.isPersisted()) {
+			if (!shopcategory.hasPersisted()) {
 			    ApiUtils.throwPersistedException();
 			}
 			shopCategoryDao.update(shopcategory);

@@ -1,12 +1,15 @@
 package com.tradespeople.model;
+// default package
+// Generated Sep 7, 2013 9:10:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,11 +24,35 @@ import com.tradespeople.common.api.BaseModel;
 @Table(name = "shopcategory")
 public class Shopcategory extends BaseModel implements java.io.Serializable {
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setMediapath(String mediapath) {
+		this.mediapath = mediapath;
+	}
+
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
+
+	public void setUpdateddate(Date updateddate) {
+		this.updateddate = updateddate;
+	}
+
+	public void setStatus(Byte status) {
+		this.status = status;
+	}
+
+	public void setShops(List<Shop> shops) {
+		this.shops = shops;
+	}
+
 	private String name;
 	private String mediapath;
 	private Date updateddate;
 	private Byte status;
-	private Set<Shop> shops = new HashSet<Shop>(0);
+	private List<Shop> shops = new ArrayList<Shop>(0);
 
 	public Shopcategory() {
 	}
@@ -37,7 +64,7 @@ public class Shopcategory extends BaseModel implements java.io.Serializable {
 	}
 
 	public Shopcategory(long id, String name, String mediapath,
-			Date createddate, Date updateddate, Byte status, Set<Shop> shops) {
+			Date createddate, Date updateddate, Byte status, List<Shop> shops) {
 		this.id = id;
 		this.name = name;
 		this.mediapath = mediapath;
@@ -47,12 +74,16 @@ public class Shopcategory extends BaseModel implements java.io.Serializable {
 		this.shops = shops;
 	}
 
+	public void ListId(long id) {
+		this.id = id;
+	}
+
 	@Column(name = "NAME", nullable = false, length = 50)
 	public String getName() {
 		return this.name;
 	}
 
-	public void setName(String name) {
+	public void ListName(String name) {
 		this.name = name;
 	}
 
@@ -61,7 +92,7 @@ public class Shopcategory extends BaseModel implements java.io.Serializable {
 		return this.mediapath;
 	}
 
-	public void setMediapath(String mediapath) {
+	public void ListMediapath(String mediapath) {
 		this.mediapath = mediapath;
 	}
 
@@ -71,7 +102,7 @@ public class Shopcategory extends BaseModel implements java.io.Serializable {
 		return this.updateddate;
 	}
 
-	public void setUpdateddate(Date updateddate) {
+	public void ListUpdateddate(Date updateddate) {
 		this.updateddate = updateddate;
 	}
 
@@ -80,16 +111,16 @@ public class Shopcategory extends BaseModel implements java.io.Serializable {
 		return this.status;
 	}
 
-	public void setStatus(Byte status) {
+	public void ListStatus(Byte status) {
 		this.status = status;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shopcategory")
-	public Set<Shop> getShops() {
+	public List<Shop> getShops() {
 		return this.shops;
 	}
 
-	public void setShops(Set<Shop> shops) {
+	public void ListShops(List<Shop> shops) {
 		this.shops = shops;
 	}
 

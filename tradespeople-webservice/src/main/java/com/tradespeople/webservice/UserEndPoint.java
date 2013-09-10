@@ -1,5 +1,7 @@
 package com.tradespeople.webservice;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +12,7 @@ import com.tradespeople.common.api.BaseController;
 import com.tradespeople.common.api.BaseResponse;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.json.request.UserRequest;
+import com.tradespeople.model.User;
 import com.tradespeople.model.builder.UserBuilder;
 import com.tradespeople.service.IUserService;
 
@@ -23,6 +26,12 @@ public class UserEndPoint extends BaseController implements IUserEndPoint {
 	
 	@Autowired
 	private UserBuilder userBuilder;
+	
+	@RequestMapping("/all")
+	@ResponseBody
+	public List<User> all(){
+		return userService.all();
+	}
 	
 	@RequestMapping("/create")
 	@ResponseBody

@@ -11,12 +11,7 @@ import javax.persistence.TemporalType;
 @MappedSuperclass
 public class BaseModel {
 
-	@Id
-	@Column(name = "ID", unique = true, nullable = false)
 	protected Long id;
-	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "CREATEDDATE", length = 0)
 	protected Date createddate;
 	
 	public BaseModel(){
@@ -31,10 +26,13 @@ public class BaseModel {
 		this(id,new Date());
 	}
 	
-	public boolean isPersisted(){
+	public boolean hasPersisted(){
 		return getId()!=null;
 	}
 
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "CREATEDDATE", length = 0)
 	public Date getCreateddate() {
 		return createddate;
 	}
@@ -43,6 +41,8 @@ public class BaseModel {
 		this.createddate = createddate;
 	}
 
+	@Id
+	@Column(name = "ID", unique = true, nullable = false)
 	public Long getId() {
 		return id;
 	}

@@ -1,13 +1,18 @@
 package com.tradespeople.model;
+// default package
+// Generated Sep 7, 2013 9:10:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.tradespeople.common.api.BaseModel;
 
@@ -26,7 +31,7 @@ public class Comment extends BaseModel implements java.io.Serializable {
 	public Comment() {
 	}
 
-	public Comment(Long id, Shop shop, User user) {
+	public Comment(long id, Shop shop, User user) {
 		this.id = id;
 		this.shop = shop;
 		this.user = user;
@@ -41,7 +46,6 @@ public class Comment extends BaseModel implements java.io.Serializable {
 		this.createddate = createddate;
 		this.status = status;
 	}
-
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SHOPID", nullable = false)

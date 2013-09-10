@@ -1,9 +1,12 @@
 package com.tradespeople.model.builder;
 
+import org.springframework.stereotype.Component;
+
 import com.tradespeople.common.builder.ResponseBuilder;
 import com.tradespeople.json.response.CommentResponse;
 import com.tradespeople.model.Comment;
 
+@Component
 public class CommentResponseBuilder extends ResponseBuilder<CommentResponse, Comment> {
 
 	@Override

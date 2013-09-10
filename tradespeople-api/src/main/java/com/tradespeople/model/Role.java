@@ -1,12 +1,15 @@
 package com.tradespeople.model;
+// default package
+// Generated Sep 7, 2013 9:10:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,24 +27,24 @@ public class Role extends BaseModel implements java.io.Serializable {
 	private String name;
 	private Date updateddate;
 	private Byte status;
-	private Set<Userrole> userroles = new HashSet<Userrole>(0);
+	private List<Userrole> userroles ;
 
 	public Role() {
 	}
 
 	public Role(long id, String name) {
-		this.id = id;
-		this.name = name;
+		this.setId(id);
+		this.setName(name);
 	}
 
 	public Role(long id, String name, Date createddate, Date updateddate,
-			Byte status, Set<Userrole> userroles) {
-		this.id = id;
-		this.name = name;
-		this.createddate = createddate;
-		this.updateddate = updateddate;
-		this.status = status;
-		this.userroles = userroles;
+			Byte status, List<Userrole> userroles) {
+		this.setId(id);
+		this.setName(name);
+		this.setCreateddate(createddate);
+		this.setUpdateddate(updateddate);
+		this.setStatus(status);
+		this.setUserroles(userroles);
 	}
 
 
@@ -50,8 +53,8 @@ public class Role extends BaseModel implements java.io.Serializable {
 		return this.name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void ListName(String name) {
+		this.setName(name);
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -60,8 +63,8 @@ public class Role extends BaseModel implements java.io.Serializable {
 		return this.updateddate;
 	}
 
-	public void setUpdateddate(Date updateddate) {
-		this.updateddate = updateddate;
+	public void ListUpdateddate(Date updateddate) {
+		this.setUpdateddate(updateddate);
 	}
 
 	@Column(name = "STATUS")
@@ -69,16 +72,40 @@ public class Role extends BaseModel implements java.io.Serializable {
 		return this.status;
 	}
 
+	public void ListStatus(Byte status) {
+		this.setStatus(status);
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
+	public List<Userrole> getUserroles() {
+		return this.userroles;
+	}
+
+	public void ListUserroles(List<Userrole> userroles) {
+		this.setUserroles(userroles);
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
+
+	public void setUpdateddate(Date updateddate) {
+		this.updateddate = updateddate;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void setStatus(Byte status) {
 		this.status = status;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	public Set<Userrole> getUserroles() {
-		return this.userroles;
-	}
-
-	public void setUserroles(Set<Userrole> userroles) {
+	public void setUserroles(List<Userrole> userroles) {
 		this.userroles = userroles;
 	}
 

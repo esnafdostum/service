@@ -31,7 +31,7 @@ public class RoleService implements IRoleService {
 	@Transactional
 	public void update(Role role) throws TradesPeopleServiceException {
 		try {
-			if (!role.isPersisted()) {
+			if (!role.hasPersisted()) {
 				ApiUtils.throwPersistedException();
 			}
 			roleHibernateDao.update(role);
@@ -43,7 +43,7 @@ public class RoleService implements IRoleService {
 	@Transactional
 	public void delete(Role role) throws TradesPeopleServiceException {
 		try {
-			if (!role.isPersisted()) {
+			if (!role.hasPersisted()) {
 				ApiUtils.throwPersistedException();
 			}
 			if (isExistUserWith(role)) {

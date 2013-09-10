@@ -33,7 +33,7 @@ public class CommentService implements ICommentService {
 	@Transactional
 	public void update(Comment comment)throws TradesPeopleServiceException {
 		try {
-			if (!comment.isPersisted()) {
+			if (!comment.hasPersisted()) {
 				ApiUtils.throwPersistedException();
 			}
 			commentHibernateDao.update(comment);
@@ -45,7 +45,7 @@ public class CommentService implements ICommentService {
 	@Transactional
 	public void delete(Comment comment)throws TradesPeopleServiceException {
 		try {
-			if (!comment.isPersisted()) {
+			if (!comment.hasPersisted()) {
 				ApiUtils.throwPersistedException();
 			}
 			commentHibernateDao.delete(comment);

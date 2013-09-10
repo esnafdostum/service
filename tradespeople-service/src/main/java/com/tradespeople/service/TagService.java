@@ -31,7 +31,7 @@ public class TagService implements ITagService{
 	@Transactional
 	public void update(Tag model) throws TradesPeopleServiceException {
 		try {
-			if (!model.isPersisted()) {
+			if (!model.hasPersisted()) {
 				ApiUtils.throwPersistedException();
 			}
 			dao.update(model);

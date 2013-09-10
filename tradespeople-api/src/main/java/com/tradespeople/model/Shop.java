@@ -1,13 +1,16 @@
 package com.tradespeople.model;
+// default package
+// Generated Sep 7, 2013 9:10:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -25,6 +28,70 @@ import com.tradespeople.common.api.BaseModel;
 public class Shop extends BaseModel implements java.io.Serializable {
 
 	private User user;
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setShopcategory(Shopcategory shopcategory) {
+		this.shopcategory = shopcategory;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
+	}
+
+	public void setStatus(Byte status) {
+		this.status = status;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
+
+	public void setUpdateddate(Date updateddate) {
+		this.updateddate = updateddate;
+	}
+
+	public void setMedialookups(List<Medialookup> medialookups) {
+		this.medialookups = medialookups;
+	}
+
+	public void setShoptags(List<Shoptag> shoptags) {
+		this.shoptags = shoptags;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	private Shopcategory shopcategory;
 	private String name;
 	private String address;
@@ -34,10 +101,11 @@ public class Shop extends BaseModel implements java.io.Serializable {
 	private BigDecimal longitude;
 	private Byte status;
 	private String about;
+	private Date createddate;
 	private Date updateddate;
-	private Set<Medialookup> medialookups = new HashSet<Medialookup>(0);
-	private Set<Shoptag> shoptags = new HashSet<Shoptag>(0);
-	private Set<Comment> comments = new HashSet<Comment>(0);
+	private List<Medialookup> medialookups = new ArrayList<Medialookup>(0);
+	private List<Shoptag> shoptags = new ArrayList<Shoptag>(0);
+	private List<Comment> comments = new ArrayList<Comment>(0);
 
 	public Shop() {
 	}
@@ -50,8 +118,8 @@ public class Shop extends BaseModel implements java.io.Serializable {
 	public Shop(long id, User user, Shopcategory shopcategory, String name,
 			String address, String district, String city, BigDecimal latitude,
 			BigDecimal longitude, Byte status, String about, Date createddate,
-			Date updateddate, Set<Medialookup> medialookups,
-			Set<Shoptag> shoptags, Set<Comment> comments) {
+			Date updateddate, List<Medialookup> medialookups,
+			List<Shoptag> shoptags, List<Comment> comments) {
 		this.id = id;
 		this.user = user;
 		this.shopcategory = shopcategory;
@@ -70,13 +138,14 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		this.comments = comments;
 	}
 
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CREATORUSERID")
 	public User getUser() {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public void ListUser(User user) {
 		this.user = user;
 	}
 
@@ -86,7 +155,7 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		return this.shopcategory;
 	}
 
-	public void setShopcategory(Shopcategory shopcategory) {
+	public void ListShopcategory(Shopcategory shopcategory) {
 		this.shopcategory = shopcategory;
 	}
 
@@ -95,7 +164,7 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		return this.name;
 	}
 
-	public void setName(String name) {
+	public void ListName(String name) {
 		this.name = name;
 	}
 
@@ -104,7 +173,7 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		return this.address;
 	}
 
-	public void setAddress(String address) {
+	public void ListAddress(String address) {
 		this.address = address;
 	}
 
@@ -113,7 +182,7 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		return this.district;
 	}
 
-	public void setDistrict(String district) {
+	public void ListDistrict(String district) {
 		this.district = district;
 	}
 
@@ -122,7 +191,7 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		return this.city;
 	}
 
-	public void setCity(String city) {
+	public void ListCity(String city) {
 		this.city = city;
 	}
 
@@ -131,7 +200,7 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		return this.latitude;
 	}
 
-	public void setLatitude(BigDecimal latitude) {
+	public void ListLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
 
@@ -140,7 +209,7 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		return this.longitude;
 	}
 
-	public void setLongitude(BigDecimal longitude) {
+	public void ListLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 	}
 
@@ -149,7 +218,7 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		return this.status;
 	}
 
-	public void setStatus(Byte status) {
+	public void ListStatus(Byte status) {
 		this.status = status;
 	}
 
@@ -158,7 +227,7 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		return this.about;
 	}
 
-	public void setAbout(String about) {
+	public void ListAbout(String about) {
 		this.about = about;
 	}
 
@@ -168,34 +237,34 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		return this.updateddate;
 	}
 
-	public void setUpdateddate(Date updateddate) {
+	public void ListUpdateddate(Date updateddate) {
 		this.updateddate = updateddate;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shop")
-	public Set<Medialookup> getMedialookups() {
+	public List<Medialookup> getMedialookups() {
 		return this.medialookups;
 	}
 
-	public void setMedialookups(Set<Medialookup> medialookups) {
+	public void ListMedialookups(List<Medialookup> medialookups) {
 		this.medialookups = medialookups;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shop")
-	public Set<Shoptag> getShoptags() {
+	public List<Shoptag> getShoptags() {
 		return this.shoptags;
 	}
 
-	public void setShoptags(Set<Shoptag> shoptags) {
+	public void ListShoptags(List<Shoptag> shoptags) {
 		this.shoptags = shoptags;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shop")
-	public Set<Comment> getComments() {
+	public List<Comment> getComments() {
 		return this.comments;
 	}
 
-	public void setComments(Set<Comment> comments) {
+	public void ListComments(List<Comment> comments) {
 		this.comments = comments;
 	}
 

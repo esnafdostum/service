@@ -23,7 +23,8 @@ import com.tradespeople.model.builder.ShopCategoryBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.IShopCategoryService;
 
-@Controller("/shopcategory")
+@Controller
+@RequestMapping("/shopcategory")
 public class ShopCategoryEndPoint extends BaseController implements IShopCategoryEndPoint {
 
 	@Autowired

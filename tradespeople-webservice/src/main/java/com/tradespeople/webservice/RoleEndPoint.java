@@ -19,7 +19,8 @@ import com.tradespeople.model.builder.RoleBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.IRoleService;
 
-@Controller("/role")
+@Controller
+@RequestMapping("/role")
 public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 	
 	@Autowired

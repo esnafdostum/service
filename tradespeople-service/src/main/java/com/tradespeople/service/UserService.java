@@ -1,6 +1,7 @@
 package com.tradespeople.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,14 +18,18 @@ public class UserService implements IUserService {
 	
 	@Autowired
 	private IUserHibernateDao userDao;
+	
+	public List<User> all(){
+		return userDao.getusers();
+	}
 
 	@Transactional
 	public void create(User user)throws TradesPeopleServiceException {
 		try {
-			if (user.isPersisted()) {
+			if (user.hasPersisted()) {
 				ApiUtils.throwNotPersistedException();
 			}
-			if (user.isNotExistAnyRole()) {
+			if (user.hasNotExistAnyRole()) {
 				ApiUtils.throwUserRolesObligationException();
 			}
 			if (isExistUserName(user.getUsername(),user.getId())) {
@@ -61,10 +66,10 @@ public class UserService implements IUserService {
 	@Transactional
 	public void update(User user)throws TradesPeopleServiceException {
 		try {
-			if (!user.isPersisted()) {
+			if (!user.hasPersisted()) {
 				ApiUtils.throwPersistedException();
 			}
-			if (user.isNotExistAnyRole()) {
+			if (user.hasNotExistAnyRole()) {
 				ApiUtils.throwUserRolesObligationException();
 			}
 			if (isUserTokenChanged(user)) {
