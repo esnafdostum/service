@@ -4,9 +4,9 @@ import com.tradespeople.common.api.PaginableRequest;
 
 public class PaginationSearchCriteria {
 
-	private int page;
-	private int count;
-	private int total;
+	private Integer page;
+	private Integer count;
+	private Integer total;
 	
 	public PaginationSearchCriteria(){
 	}
@@ -19,6 +19,13 @@ public class PaginationSearchCriteria {
 	}
 	public static PaginationSearchCriteria buildFor(PaginableRequest request){
 		return new PaginationSearchCriteria(request.getPage(),request.getCount(), request.getTotal());
+	}
+	
+	public boolean hasPagination(){
+		if (page!=null && count!=null && count!=0) {
+			return true;
+		}
+		return false;
 	}
 	
 	public int getPage() {
