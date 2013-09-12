@@ -14,5 +14,5 @@ public interface ICommentHibernateDao {
 
 	void delete(Comment comment) throws  TradesPeopleDaoException;
 
-	List<Comment> listShopCategories(PaginationSearchCriteria buildFor, Long shopId) throws  TradesPeopleDaoException;
+	List<Comment> listShopComments(PaginationSearchCriteria buildFor, Long shopId) throws  TradesPeopleDaoException;
 }

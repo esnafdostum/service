@@ -63,7 +63,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 	}
 	
 	@RequestMapping("/commentsbyshop/{shopId}")
-	public CommentCollectionResponse tagsByShop(@RequestBody PaginableRequest request,@PathVariable("shopId") Long shopId){
+	public CommentCollectionResponse commentsByShop(@RequestBody PaginableRequest request,@PathVariable("shopId") Long shopId){
 		
 		try {
 			List<Comment> comments=commentService.listShopComments(PaginationSearchCriteria.buildFor(request),shopId);

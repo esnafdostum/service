@@ -58,7 +58,7 @@ public class CommentService implements ICommentService {
 	@Transactional(readOnly=true)
 	public List<Comment> listShopComments(PaginationSearchCriteria searchCriteria, Long shopId) throws TradesPeopleServiceException {
 		try {
-			return commentHibernateDao.listShopCategories(searchCriteria,shopId);
+			return commentHibernateDao.listShopComments(searchCriteria,shopId);
 		} catch (TradesPeopleDaoException e) {
 			throw new TradesPeopleServiceException(e);
 		}
