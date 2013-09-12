@@ -52,4 +52,24 @@ public class CommentDao extends BaseHibernateDaoSupport implements ICommentHiber
 		return criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Comment> listUserComments(PaginationSearchCriteria searchCriteria, Long userId) throws TradesPeopleDaoException {
+		Criteria criteria=createPaginationCriteria(Comment.class, searchCriteria);
+		criteria.createAlias("user", "user");
+		criteria.add(Restrictions.eq("user.id", userId));
+		return criteria.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Comment> listCommentsByShopAndUser(PaginationSearchCriteria searchCriteria, Long userId, Long shopId)throws TradesPeopleDaoException {
+		Criteria criteria=createPaginationCriteria(Comment.class, searchCriteria);
+		criteria.createAlias("user", "user");
+		criteria.createAlias("shop", "shop");
+		criteria.add(Restrictions.eq("user.id", userId));
+		criteria.add(Restrictions.eq("shop.id", shopId));
+		return criteria.list();
+	}
+
 }

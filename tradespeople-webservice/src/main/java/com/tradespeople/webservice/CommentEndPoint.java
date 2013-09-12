@@ -76,6 +76,36 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 			return new CommentCollectionResponse().failResponse(e.getMessage());
 		}
 	}
+	
+	@RequestMapping("/commentsbyuser/{userId}")
+	public CommentCollectionResponse commentsByUser(@RequestBody PaginableRequest request,@PathVariable("userId") Long userId){
+		
+		try {
+			List<Comment> comments=commentService.listUserComments(PaginationSearchCriteria.buildFor(request),userId);
+			CommentCollectionResponse response=new CommentCollectionResponse();
+			for (Comment comment : comments) {
+				response.add(commentBuilder.buildResponse(comment));
+			}
+			return response;
+		} catch (TradesPeopleServiceException e) {
+			return new CommentCollectionResponse().failResponse(e.getMessage());
+		}
+	}
+	
+	@RequestMapping("/commentsbyuserandshop/{userId}/{shopId}")
+	public CommentCollectionResponse commentsByUserAndShop(@RequestBody PaginableRequest request,@PathVariable("userId") Long userId,@PathVariable("shopId") Long shopId){
+		
+		try {
+			List<Comment> comments=commentService.listCommentsByShopAndUser(PaginationSearchCriteria.buildFor(request),userId,shopId);
+			CommentCollectionResponse response=new CommentCollectionResponse();
+			for (Comment comment : comments) {
+				response.add(commentBuilder.buildResponse(comment));
+			}
+			return response;
+		} catch (TradesPeopleServiceException e) {
+			return new CommentCollectionResponse().failResponse(e.getMessage());
+		}
+	}
 
 	public void setCommentService(ICommentService commentService) {
 		this.commentService = commentService;

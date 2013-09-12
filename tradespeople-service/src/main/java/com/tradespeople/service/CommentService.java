@@ -64,8 +64,28 @@ public class CommentService implements ICommentService {
 		}
 	}
 	
+	@Transactional(readOnly=true)
+	public List<Comment> listUserComments(PaginationSearchCriteria searchCriteria,Long userId) throws TradesPeopleServiceException {
+		try {
+			return commentHibernateDao.listUserComments(searchCriteria,userId);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Comment> listCommentsByShopAndUser(PaginationSearchCriteria searchCriteria, Long userId, Long shopId) throws TradesPeopleServiceException {
+		try {
+			return commentHibernateDao.listCommentsByShopAndUser(searchCriteria,userId,shopId);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+	
 	public void setCommentHibernateDao(ICommentHibernateDao commentHibernateDao) {
 		this.commentHibernateDao = commentHibernateDao;
 	}
+
 
 }

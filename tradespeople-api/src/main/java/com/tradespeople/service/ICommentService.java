@@ -16,4 +16,8 @@ public interface ICommentService {
 
 	List<Comment> listShopComments(PaginationSearchCriteria searchCriteria, Long shopId) throws TradesPeopleServiceException;
 
+	List<Comment> listUserComments(PaginationSearchCriteria searchCriteria,Long userId)  throws TradesPeopleServiceException;
+
+	List<Comment> listCommentsByShopAndUser(PaginationSearchCriteria searchCriteria,Long userId, Long shopId)  throws TradesPeopleServiceException;
+
 }
