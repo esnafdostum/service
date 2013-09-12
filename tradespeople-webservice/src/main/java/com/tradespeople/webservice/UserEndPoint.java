@@ -10,16 +10,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tradespeople.common.api.BaseController;
 import com.tradespeople.common.api.BaseResponse;
+import com.tradespeople.common.api.PaginableRequest;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.json.request.UserRequest;
 import com.tradespeople.model.User;
 import com.tradespeople.model.builder.UserBuilder;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.IUserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserEndPoint extends BaseController implements IUserEndPoint {
-	
 	
 	@Autowired
 	private IUserService userService;
@@ -29,8 +30,14 @@ public class UserEndPoint extends BaseController implements IUserEndPoint {
 	
 	@RequestMapping("/all")
 	@ResponseBody
-	public List<User> all(){
+	public List<User> all() throws TradesPeopleServiceException{
 		return userService.all();
+	}
+	
+	@RequestMapping("/allWithPagination")
+	@ResponseBody
+	public List<User> all(@RequestBody PaginableRequest request) throws TradesPeopleServiceException{
+		return userService.all(PaginationSearchCriteria.buildFor(request));
 	}
 	
 	@RequestMapping("/create")

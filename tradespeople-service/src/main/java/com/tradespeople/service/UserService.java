@@ -11,6 +11,7 @@ import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.dao.IUserHibernateDao;
 import com.tradespeople.model.User;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.utils.ApiUtils;
 
 @Service
@@ -19,8 +20,14 @@ public class UserService implements IUserService {
 	@Autowired
 	private IUserHibernateDao userDao;
 	
-	public List<User> all(){
-		return userDao.getusers();
+	@Transactional(readOnly=true)
+	public List<User> all()  throws TradesPeopleServiceException{
+		try {
+			return userDao.listUsers();
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+		
 	}
 
 	@Transactional
@@ -96,6 +103,16 @@ public class UserService implements IUserService {
 
 	public void setUserDao(IUserHibernateDao userDao) {
 		this.userDao = userDao;
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<User> all(PaginationSearchCriteria searchCriteria) throws TradesPeopleServiceException {
+		try {
+			return userDao.listUsers(searchCriteria);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
 	}
 
 }

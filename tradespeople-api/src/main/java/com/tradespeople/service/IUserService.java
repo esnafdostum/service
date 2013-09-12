@@ -4,10 +4,15 @@ import java.util.List;
 
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.model.User;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 
 public interface IUserService {
 
 	void create(User user) throws TradesPeopleServiceException;
-	void update(User user)throws TradesPeopleServiceException;
-	public List<User> all();
+
+	void update(User user) throws TradesPeopleServiceException;
+
+	public List<User> all() throws TradesPeopleServiceException;
+
+	public List<User> all(PaginationSearchCriteria searchCriteria) throws TradesPeopleServiceException;
 }

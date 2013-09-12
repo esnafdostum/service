@@ -15,11 +15,13 @@ public class BaseHibernateDaoSupport extends HibernateDaoSupport {
 	}
 	
 	
-	public void getPaginationCriteria(Criteria criteria ,PaginationSearchCriteria paginationSearchCriteria){
+	public Criteria createPaginationCriteria(Class clazz ,PaginationSearchCriteria paginationSearchCriteria){
+		Criteria criteria=getSession().createCriteria(clazz);
 		if (paginationSearchCriteria.hasPagination()) {
 			criteria.setMaxResults(paginationSearchCriteria.getCount());
 			criteria.setFirstResult(paginationSearchCriteria.getPage());
 		}
+		return criteria;
 	}
 
 }
