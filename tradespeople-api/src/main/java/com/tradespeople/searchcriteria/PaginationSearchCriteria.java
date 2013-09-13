@@ -1,5 +1,7 @@
 package com.tradespeople.searchcriteria;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.tradespeople.common.api.PaginableRequest;
 
 public class PaginationSearchCriteria {
@@ -7,6 +9,9 @@ public class PaginationSearchCriteria {
 	private Integer page;
 	private Integer count;
 	private Integer total;
+	private String sortBy;
+	private String sortType;
+	private boolean cached;
 	
 	public PaginationSearchCriteria(){
 	}
@@ -45,6 +50,37 @@ public class PaginationSearchCriteria {
 	}
 	public void setTotal(int total) {
 		this.total = total;
+	}
+
+	public String getSortBy() {
+		return sortBy;
+	}
+
+	public void setSortBy(String sortBy) {
+		this.sortBy = sortBy;
+	}
+
+	public boolean isSortDescending() {
+		if (StringUtils.isNotBlank(sortType)) {
+			return StringUtils.upperCase("desc").equals(sortType);
+		}
+		return false;
+	}
+
+	public String getSortType() {
+		return sortType;
+	}
+
+	public void setSortType(String sortType) {
+		this.sortType = sortType;
+	}
+
+	public boolean isCached() {
+		return cached;
+	}
+
+	public void setCached(boolean cached) {
+		this.cached = cached;
 	}
 	
 }

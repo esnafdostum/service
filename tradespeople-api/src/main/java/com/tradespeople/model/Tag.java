@@ -2,14 +2,13 @@ package com.tradespeople.model;
 // default package
 // Generated Sep 7, 2013 9:10:51 PM by Hibernate Tools 3.4.0.CR1
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,18 +22,6 @@ import com.tradespeople.common.api.BaseModel;
 @Entity
 @Table(name = "tag", catalog = "tradesman")
 public class Tag extends BaseModel implements java.io.Serializable {
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setUpdateddate(Date updateddate) {
-		this.updateddate = updateddate;
-	}
-
-	public void setShoptags(List<Shoptag> shoptags) {
-		this.shoptags = shoptags;
-	}
 
 	private String name;
 	private Date updateddate;
@@ -56,9 +43,17 @@ public class Tag extends BaseModel implements java.io.Serializable {
 		this.updateddate = updateddate;
 		this.shoptags = shoptags;
 	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	public void ListId(long id) {
-		this.id = id;
+	public void setUpdateddate(Date updateddate) {
+		this.updateddate = updateddate;
+	}
+
+	public void setShoptags(List<Shoptag> shoptags) {
+		this.shoptags = shoptags;
 	}
 
 	@Column(name = "NAME", nullable = false, length = 50)
@@ -68,10 +63,6 @@ public class Tag extends BaseModel implements java.io.Serializable {
 
 	public void ListName(String name) {
 		this.name = name;
-	}
-
-	public void ListCreateddate(Date createddate) {
-		this.createddate = createddate;
 	}
 
 	@Temporal(TemporalType.DATE)

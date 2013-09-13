@@ -32,9 +32,13 @@ public class ShopTagService implements IShopTagService {
 	@Autowired
 	private ShopTagBuilder shopTagBuilder; 
 	
-	@Override
+	@Transactional(readOnly=true)
 	public List<Tag> listShopTags(PaginationSearchCriteria searchCriteria, Long shopId) throws TradesPeopleServiceException {
-		return new ArrayList<Tag>();
+		try {
+			return shopTagDao.listShopTags(searchCriteria,shopId);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
 	}
 
 	@Transactional
@@ -60,7 +64,11 @@ public class ShopTagService implements IShopTagService {
 	
 	@Override
 	public List<Shop> listShopsByTag(PaginationSearchCriteria searchCriteria, Long tagid) throws TradesPeopleServiceException {
-		return null;
+		try {
+			return shopTagDao.listShopsByTag(searchCriteria,tagid);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
 	}
 	
 	@Transactional
@@ -82,9 +90,17 @@ public class ShopTagService implements IShopTagService {
 	}
 	
 	@Transactional
-	private boolean isNotExistTagsFor(Long shopId, Long id) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean isNotExistTagsFor(Long shopId, Long tagId) throws TradesPeopleServiceException {
+		try {
+			Shoptag shoptag=shopTagDao.findShopTagBy(shopId,tagId);
+			if (shoptag==null) {
+				return true;
+			}else{
+				return false;
+			}
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
 	}
 
 	public void setShopTagDao(IShopTagHibernateDao shopTagDao) {

@@ -35,17 +35,10 @@
 		class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
 
 
-	<context:component-scan base-package="com.tradespeople"></context:component-scan>
+	<context:component-scan base-package="com.tradespeople"/>
 	<tx:annotation-driven transaction-manager="transactionManager.TRADESPEOPLE" />
 
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver" />
-
-	<!-- DATASOURCE, SESSIONFACTORY AND HIBERNATE MAPPINGS -->
-
-	<!--bean id="dataSource.TRADESPEOPLE" class="org.springframework.jndi.JndiObjectFactoryBean"> 
-		<property name="jndiName" value="java:comp/env/jdbc/TRADESPEOPLE"/> <property 
-		name="lookupOnStartup" value="true"/> <property name="proxyInterface" value="javax.sql.DataSource"/> 
-		</bean -->
 
 	<bean id="DataSource.TRADESPEOPLE"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -65,6 +58,7 @@
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="suppressClose">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 			</props>
 		</property>
 	</bean>
@@ -75,12 +69,11 @@
 		</constructor-arg>
 	</bean>
 
-	<tx:annotation-driven transaction-manager="TransactionManager.TRADESPEOPLE" />
-	<bean id="TransactionManager.TRADESPEOPLE"
+	
+	<bean id="transactionManager.TRADESPEOPLE"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory.TRADESPEOPLE" />
 	</bean>
-
 	<!--import resource="applicationContext-grid.xml" / -->
 
 
