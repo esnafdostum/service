@@ -5,13 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.tradespeople.common.builder.ResponseBuilder;
-import com.tradespeople.json.request.MediaRequest;
-import com.tradespeople.json.response.CommentResponse;
 import com.tradespeople.json.response.MediaCollectionResponse;
 import com.tradespeople.json.response.MediaResponse;
-import com.tradespeople.model.Comment;
 import com.tradespeople.model.Media;
-import com.tradespeople.model.User;
 
 @Component
 public class MediaResponseBuilder extends ResponseBuilder<MediaResponse, Media> {

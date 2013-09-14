@@ -27,7 +27,21 @@ import com.tradespeople.common.api.BaseModel;
 @Table(name = "shop")
 public class Shop extends BaseModel implements java.io.Serializable {
 
+	private String name;
+	private String address;
+	private String district;
+	private String city;
+	private BigDecimal latitude;
+	private BigDecimal longitude;
+	private Byte status;
+	private String about;
+	private Date updateddate;
+	private List<Medialookup> medialookups = new ArrayList<Medialookup>(0);
+	private List<Shoptag> shoptags = new ArrayList<Shoptag>(0);
+	private List<Comment> comments = new ArrayList<Comment>(0);
 	private User user;
+	private Shopcategory shopcategory;
+	
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -72,10 +86,6 @@ public class Shop extends BaseModel implements java.io.Serializable {
 		this.about = about;
 	}
 
-	public void setCreateddate(Date createddate) {
-		this.createddate = createddate;
-	}
-
 	public void setUpdateddate(Date updateddate) {
 		this.updateddate = updateddate;
 	}
@@ -91,21 +101,6 @@ public class Shop extends BaseModel implements java.io.Serializable {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-
-	private Shopcategory shopcategory;
-	private String name;
-	private String address;
-	private String district;
-	private String city;
-	private BigDecimal latitude;
-	private BigDecimal longitude;
-	private Byte status;
-	private String about;
-	private Date createddate;
-	private Date updateddate;
-	private List<Medialookup> medialookups = new ArrayList<Medialookup>(0);
-	private List<Shoptag> shoptags = new ArrayList<Shoptag>(0);
-	private List<Comment> comments = new ArrayList<Comment>(0);
 
 	public Shop() {
 	}

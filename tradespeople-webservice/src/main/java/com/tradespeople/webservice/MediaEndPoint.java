@@ -67,7 +67,6 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	@RequestMapping("/getAllMedia")
 	@ResponseBody
 	public MediaCollectionResponse getAllMedia() {
-		// TODO Auto-generated method stub
 		try {
 			return mediaBuilder.buildFor(mediaService.getAllMedia());
 		} catch (TradesPeopleServiceException e) {
@@ -76,9 +75,9 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	}
 
 	@Override
-	@RequestMapping("/getAllMediaByStatus")
+	@RequestMapping("/getAllMediaByStatus/{status}")
 	@ResponseBody
-	public MediaCollectionResponse getAllMediaByStatus(@PathVariable Byte status) {
+	public MediaCollectionResponse getAllMediaByStatus(@PathVariable("status") Byte status) {
 		try {
 			return mediaBuilder.buildFor(mediaService.getAllMediaByStatus(status));
 		} catch (TradesPeopleServiceException e) {
@@ -87,9 +86,9 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	}
 
 	@Override
-	@RequestMapping("/getAllMediaByType")
+	@RequestMapping("/getAllMediaByType/{type}")
 	@ResponseBody
-	public MediaCollectionResponse getAllMediaByType(@PathVariable String type) {
+	public MediaCollectionResponse getAllMediaByType(@PathVariable("type") String type) {
 		try {
 			return mediaBuilder.buildFor(mediaService.getAllMediaByType(type));
 		} catch (TradesPeopleServiceException e) {
@@ -98,12 +97,11 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	}
 
 	@Override
-	@RequestMapping("/getAllMediaByTypeAndStatus")
+	@RequestMapping("/getAllMediaByTypeAndStatus/{type}/{status}")
 	@ResponseBody
-	public MediaCollectionResponse getAllMediaByType(@PathVariable String type,@PathVariable String status) {
+	public MediaCollectionResponse getAllMediaByType(@PathVariable("type") String type,@PathVariable("status") String status) {
 		try {
-			return mediaBuilder.buildFor(mediaService.getAllMediaByType(type,
-					status));
+			return mediaBuilder.buildFor(mediaService.getAllMediaByType(type,status));
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage(),MediaCollectionResponse.class);
 		}

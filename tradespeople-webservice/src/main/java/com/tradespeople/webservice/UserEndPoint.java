@@ -1,9 +1,13 @@
 package com.tradespeople.webservice;
 
 import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,7 +59,7 @@ public class UserEndPoint extends BaseController implements IUserEndPoint {
 
 	@RequestMapping("/allUser")
 	@ResponseBody
-	public UserCollectionResponse  allUser(){
+	public UserCollectionResponse  allUser(Locale locale, Model model,HttpServletRequest  request,HttpServletRequest httpResponse ){
 		try {
 			List<User> users=userService.all(PaginationSearchCriteria.emptyPaginationSearchCriteria());
 			UserCollectionResponse response=new UserCollectionResponse();
