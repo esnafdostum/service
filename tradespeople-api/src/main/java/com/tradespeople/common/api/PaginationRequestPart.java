@@ -14,12 +14,16 @@ public class PaginationRequestPart {
 			return Integer.valueOf(count);
 		}
 	}
+	
+	public static enum SortType {
+		ASC,DESC
+	}
 
 	private int page;
-	private PaginationCount paginationCount;
+	private PaginationCount paginationCount=PaginationCount.ALL;
 	private int total;
 	private String sortBy;
-	private String sortType;
+	private SortType sortType=SortType.ASC;
 	private boolean cached;
 
 	public int getPage() {
@@ -54,11 +58,11 @@ public class PaginationRequestPart {
 		this.sortBy = sortBy;
 	}
 
-	public String getSortType() {
+	public SortType getSortType() {
 		return sortType;
 	}
 
-	public void setSortType(String sortType) {
+	public void setSortType(SortType sortType) {
 		this.sortType = sortType;
 	}
 
@@ -68,6 +72,10 @@ public class PaginationRequestPart {
 
 	public void setCached(boolean cached) {
 		this.cached = cached;
+	}
+
+	public void setPaginationCount(PaginationCount paginationCount) {
+		this.paginationCount = paginationCount;
 	}
 
 }
