@@ -69,6 +69,27 @@ public class RoleService implements IRoleService {
 		}
 	}
 
+	@Override
+	@Transactional
+	public List<Role> getAllRoles() throws TradesPeopleServiceException {
+		try {
+			return roleHibernateDao.getAllRoles();
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+	@Override
+	@Transactional
+	public List<Role> getAllRolesByStatus(Byte status)
+			throws TradesPeopleServiceException {
+		try {
+			return roleHibernateDao.getAllRolesByStatus(status);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
 	public void setRoleHibernateDao(IRoleHibernateDao roleHibernateDao) {
 		this.roleHibernateDao = roleHibernateDao;
 	}

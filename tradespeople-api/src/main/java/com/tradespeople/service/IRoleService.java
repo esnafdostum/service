@@ -15,4 +15,9 @@ public interface IRoleService {
 	void delete(Role role) throws TradesPeopleServiceException;
 
 	List<Role> listRoles(PaginationSearchCriteria searchCriteria) throws TradesPeopleServiceException;
+	
+	List<Role> getAllRoles() throws TradesPeopleServiceException;
+	
+	List<Role> getAllRolesByStatus(Byte status) throws TradesPeopleServiceException;
+
 }

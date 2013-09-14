@@ -19,8 +19,7 @@ import com.tradespeople.model.builder.RoleBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.IRoleService;
 
-@Controller
-@RequestMapping("/role")
+@Controller("/role")
 public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 	
 	@Autowired
@@ -29,7 +28,7 @@ public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 	@Autowired
 	private RoleBuilder roleBuilder;
 	
-	@RequestMapping("/create")
+	@RequestMapping("/createRole")
 	@ResponseBody
 	public BaseResponse save(@RequestBody RoleRequest request){
 		try {
@@ -40,7 +39,7 @@ public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 		}
 	}
 	
-	@RequestMapping("/update")
+	@RequestMapping("/updateRole")
 	@ResponseBody
 	public BaseResponse update(@RequestBody RoleRequest request){
 		try {
@@ -51,7 +50,7 @@ public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 		}
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/deleteRole")
 	@ResponseBody
 	public BaseResponse delete(@RequestBody RoleRequest request){
 		try {

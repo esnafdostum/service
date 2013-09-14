@@ -15,4 +15,11 @@ public interface ITagHibernateDao{
 
 	public List<Tag> listTags(PaginationSearchCriteria searchCriteria) throws TradesPeopleDaoException;
 
+	public List<Tag> getAllTagsByStatus(Byte status) throws TradesPeopleDaoException;
+	
+	public List<Tag> getTagsByName(String name) throws TradesPeopleDaoException;
+
+	Tag  getTagById(Long id) throws TradesPeopleDaoException;
+
+
 }

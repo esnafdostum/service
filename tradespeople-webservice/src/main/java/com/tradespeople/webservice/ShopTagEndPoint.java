@@ -18,6 +18,7 @@ import com.tradespeople.json.response.TagCollectionResponse;
 import com.tradespeople.model.Shop;
 import com.tradespeople.model.Tag;
 import com.tradespeople.model.builder.ShopBuilder;
+import com.tradespeople.model.builder.ShopTagBuilder;
 import com.tradespeople.model.builder.TagBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.IShopTagService;
@@ -34,6 +35,10 @@ public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint 
 	
 	@Autowired
 	private ShopBuilder shopBuilder;
+	
+	@Autowired
+	private
+	ShopTagBuilder shopTagBuilder;
 	
 	
 	@RequestMapping("/tagsbyshop/{shopId}")
@@ -100,6 +105,14 @@ public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint 
 
 	public void setShopBuilder(ShopBuilder shopBuilder) {
 		this.shopBuilder = shopBuilder;
+	}
+
+	public ShopTagBuilder getShopTagBuilder() {
+		return shopTagBuilder;
+	}
+
+	public void setShopTagBuilder(ShopTagBuilder shopTagBuilder) {
+		this.shopTagBuilder = shopTagBuilder;
 	}
 
 }

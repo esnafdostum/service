@@ -3,6 +3,7 @@ package com.tradespeople.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -42,4 +43,42 @@ public class TagDao extends BaseHibernateDaoSupport implements ITagHibernateDao 
 		}
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tag> getAllTagsByStatus(Byte status)
+			throws TradesPeopleDaoException {
+		try {
+			return getSession().createCriteria(Tag.class)
+					.add(Restrictions.eq("status", status))
+					.list();
+			} catch (DataAccessException e) {
+				throw new TradesPeopleDaoException(e.getMessage());
+			}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tag> getTagsByName(String name) throws TradesPeopleDaoException {
+		try {
+			return getSession().createCriteria(Tag.class)
+					.add(Restrictions.eq("name", name))
+					.list();
+			} catch (DataAccessException e) {
+				throw new TradesPeopleDaoException(e.getMessage());
+			}
+	}
+
+	@Override
+	public Tag getTagById(Long id) throws TradesPeopleDaoException {
+		try {
+			return  (Tag) getSession().createCriteria(Tag.class)
+					.add(Restrictions.eq("id", id))
+					.uniqueResult();
+			} catch (DataAccessException e) {
+				throw new TradesPeopleDaoException(e.getMessage());
+			}
+	}
+	
+
 }

@@ -18,6 +18,9 @@ public class PaginationRequestPart {
 	private int page;
 	private PaginationCount paginationCount;
 	private int total;
+	private String sortBy;
+	private String sortType;
+	private boolean cached;
 
 	public int getPage() {
 		return page;
@@ -41,6 +44,30 @@ public class PaginationRequestPart {
 
 	public void setCount(PaginationCount count) {
 		this.paginationCount = count;
+	}
+
+	public String getSortBy() {
+		return sortBy;
+	}
+
+	public void setSortBy(String sortBy) {
+		this.sortBy = sortBy;
+	}
+
+	public String getSortType() {
+		return sortType;
+	}
+
+	public void setSortType(String sortType) {
+		this.sortType = sortType;
+	}
+
+	public boolean isCached() {
+		return cached;
+	}
+
+	public void setCached(boolean cached) {
+		this.cached = cached;
 	}
 
 }

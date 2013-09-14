@@ -23,7 +23,10 @@ public class ShopTagResponseBuilder extends ResponseBuilder<ShopTagResponse, Sho
 
 	@Override
 	public ShopTagResponse build(Shoptag model) {
-		// TODO Auto-generated method stub
+		ShopTagResponse response=new ShopTagResponse();
+		
+		response.setShopId(model.getShop().getId());
+		//response.setTags(tags);
 		return null;
 	}
 

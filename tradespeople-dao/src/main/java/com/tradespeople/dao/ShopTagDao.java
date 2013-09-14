@@ -78,4 +78,62 @@ public class ShopTagDao extends BaseHibernateDaoSupport implements IShopTagHiber
 		return criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Shoptag> getShopsTagsByStatus(Shop shop, Byte status)
+			throws TradesPeopleDaoException {
+		try {
+			return getSession().createCriteria(Shoptag.class)
+					.add(Restrictions.eq("shop", shop))
+					.add(Restrictions.eq("status", status))
+					.list();
+			} catch (DataAccessException e) {
+				throw new TradesPeopleDaoException(e.getMessage());
+			}
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Shoptag> getShopsTagsByStatus(Tag tag, Byte status)
+			throws TradesPeopleDaoException {
+		try {
+			return getSession().createCriteria(Shoptag.class)
+					.add(Restrictions.eq("tag", tag))
+					.add(Restrictions.eq("status", status))
+					.list();
+			} catch (DataAccessException e) {
+				throw new TradesPeopleDaoException(e.getMessage());
+			}
+	}
+
+	@Override
+	public Shoptag getShopTagById(Long id) throws TradesPeopleDaoException {
+		try {
+			return (Shoptag) getSession().createCriteria(Shoptag.class)
+					.add(Restrictions.eq("id", id))
+					.uniqueResult();
+			} catch (DataAccessException e) {
+				throw new TradesPeopleDaoException(e.getMessage());
+			}
+	}
+
+	@Override
+	public void update(Shoptag shoptag) throws TradesPeopleDaoException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Shoptag> getShopTags(Tag tag) throws TradesPeopleDaoException {
+		try {
+			return getSession().createCriteria(Shoptag.class)
+					.add(Restrictions.eq("tag", tag))
+					.list();
+			} catch (DataAccessException e) {
+				throw new TradesPeopleDaoException(e.getMessage());
+			}
+	}
+
 }

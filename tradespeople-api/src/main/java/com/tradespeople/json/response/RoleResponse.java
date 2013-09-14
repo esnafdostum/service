@@ -1,4 +1,4 @@
-package com.tradespeople.json.request;
+package com.tradespeople.json.response;
 
 import java.util.Date;
 

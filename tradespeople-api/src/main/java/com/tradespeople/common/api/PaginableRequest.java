@@ -20,4 +20,16 @@ public abstract class PaginableRequest extends BaseRequest {
 		return paginationRequestPart.getTotal();
 	}
 	
+	public String getSortBy(){
+		return paginationRequestPart.getSortBy();
+	}
+	
+	public String getSortType(){
+		return paginationRequestPart.getSortType();
+	}
+	
+	public boolean isCached(){
+		return paginationRequestPart.isCached();
+	}
+	
 }

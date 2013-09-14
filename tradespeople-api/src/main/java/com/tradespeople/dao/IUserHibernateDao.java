@@ -10,8 +10,6 @@ public interface IUserHibernateDao {
 
 	void create(User user) throws TradesPeopleDaoException;
 	
-	List<User> listUsers() throws TradesPeopleDaoException;
-
 	void update(User user) throws TradesPeopleDaoException;
 
 	User getUserBy(Long id) throws TradesPeopleDaoException;

@@ -29,7 +29,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 	@Autowired
 	private CommentBuilder commentBuilder;
 	
-	@RequestMapping("/create")
+	@RequestMapping("/createComment")
 	@ResponseBody
 	public BaseResponse save(@RequestBody CommentRequest request){
 		try {
@@ -40,7 +40,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 		}
 	}
 	
-	@RequestMapping("/update")
+	@RequestMapping("/updateComment")
 	@ResponseBody
 	public BaseResponse update(@RequestBody CommentRequest request){
 		try {
@@ -51,7 +51,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 		}
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/deleteComment")
 	@ResponseBody
 	public BaseResponse delete(@RequestBody CommentRequest request){
 		try {

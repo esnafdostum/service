@@ -13,6 +13,8 @@ import com.tradespeople.common.api.BaseResponse;
 import com.tradespeople.common.api.PaginableRequest;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.json.request.UserRequest;
+import com.tradespeople.json.response.UserCollectionResponse;
+import com.tradespeople.json.response.UserResponse;
 import com.tradespeople.model.User;
 import com.tradespeople.model.builder.UserBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
@@ -22,25 +24,14 @@ import com.tradespeople.service.IUserService;
 @RequestMapping("/user")
 public class UserEndPoint extends BaseController implements IUserEndPoint {
 	
+	
 	@Autowired
 	private IUserService userService;
 	
 	@Autowired
 	private UserBuilder userBuilder;
 	
-	@RequestMapping("/all")
-	@ResponseBody
-	public List<User> all() throws TradesPeopleServiceException{
-		return userService.all();
-	}
-	
-	@RequestMapping("/allWithPagination")
-	@ResponseBody
-	public List<User> all(@RequestBody PaginableRequest request) throws TradesPeopleServiceException{
-		return userService.all(PaginationSearchCriteria.buildFor(request));
-	}
-	
-	@RequestMapping("/create")
+	@RequestMapping("/createUser")
 	@ResponseBody
 	public BaseResponse save(@RequestBody UserRequest request){
 		try {
@@ -51,7 +42,7 @@ public class UserEndPoint extends BaseController implements IUserEndPoint {
 		}
 	}
 	
-	@RequestMapping("/update")
+	@RequestMapping("/updateUser")
 	@ResponseBody
 	public BaseResponse update(@RequestBody UserRequest request){
 		try {
@@ -60,6 +51,38 @@ public class UserEndPoint extends BaseController implements IUserEndPoint {
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage());
 		}
+	}
+
+	@RequestMapping("/allUser")
+	@ResponseBody
+	public UserCollectionResponse  allUser(){
+		try {
+			List<User> users=userService.all(PaginationSearchCriteria.emptyPaginationSearchCriteria());
+			UserCollectionResponse response=new UserCollectionResponse();
+			for (User user : users) {
+				response.add(userBuilder.buildResponse(user));
+			}
+			return response;
+		} catch (TradesPeopleServiceException e) {
+			return BaseResponse.fail(e.getMessage(), UserCollectionResponse.class);
+		}
+		
+	}
+	
+	@RequestMapping("/allWithPagination")
+	@ResponseBody
+	public UserCollectionResponse all(@RequestBody PaginableRequest request){
+		try {
+			List<User> users=userService.all(PaginationSearchCriteria.buildFor(request));
+			UserCollectionResponse response=new UserCollectionResponse();
+			for (User user : users) {
+				response.add(userBuilder.buildResponse(user));
+			}
+			return response;
+		} catch (TradesPeopleServiceException e) {
+			return BaseResponse.fail(e.getMessage(), UserCollectionResponse.class);
+		}
+		
 	}
 
 	public void setUserService(IUserService userService) {
@@ -71,3 +94,4 @@ public class UserEndPoint extends BaseController implements IUserEndPoint {
 	}
 
 }
+ 	

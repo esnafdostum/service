@@ -29,18 +29,18 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 	@Autowired
 	private TagBuilder tagBuilder;
 	
-	@RequestMapping("/create")
+	@RequestMapping("/createTag")
 	@ResponseBody
 	public BaseResponse save(@RequestBody TagRequest request){
 		try {
-			tagService.create(tagBuilder.buildFor(request));
+			tagService.create((tagBuilder.buildFor(request)));
 			return BaseResponse.successful();
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage());
 		}
 	}
 	
-	@RequestMapping("/update")
+	@RequestMapping("/updateTag")
 	@ResponseBody
 	public BaseResponse update(@RequestBody TagRequest request){
 		try {

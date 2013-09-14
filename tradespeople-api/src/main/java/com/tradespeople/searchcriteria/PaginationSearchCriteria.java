@@ -13,17 +13,26 @@ public class PaginationSearchCriteria {
 	private String sortType;
 	private boolean cached;
 	
+	public static PaginationSearchCriteria emptyPaginationSearchCriteria(){
+		PaginationSearchCriteria searchCriteria=new PaginationSearchCriteria();
+		return searchCriteria;
+	}
+	
 	public PaginationSearchCriteria(){
 	}
 	
-	public PaginationSearchCriteria(int page, int count, int total) {
+	public PaginationSearchCriteria(Integer page, Integer count, Integer total,String sortBy, String sortType, boolean cached) {
 		super();
 		this.page = page;
 		this.count = count;
 		this.total = total;
+		this.sortBy = sortBy;
+		this.sortType = sortType;
+		this.cached = cached;
 	}
+	
 	public static PaginationSearchCriteria buildFor(PaginableRequest request){
-		return new PaginationSearchCriteria(request.getPage(),request.getCount(), request.getTotal());
+		return new PaginationSearchCriteria(request.getPage(),request.getCount(), request.getTotal(),request.getSortBy(),request.getSortType(),request.isCached());
 	}
 	
 	public boolean hasPagination(){

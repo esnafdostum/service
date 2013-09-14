@@ -12,7 +12,11 @@ public interface IUserService {
 
 	void update(User user) throws TradesPeopleServiceException;
 
-	public List<User> all() throws TradesPeopleServiceException;
+//	public List<User> all() throws TradesPeopleServiceException;
 
 	public List<User> all(PaginationSearchCriteria searchCriteria) throws TradesPeopleServiceException;
+	
+	User getUserBy(Long id) throws TradesPeopleServiceException;
+
+	User getUserBy(String username) throws TradesPeopleServiceException;
 }

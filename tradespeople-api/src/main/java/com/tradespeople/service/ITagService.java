@@ -14,4 +14,10 @@ public interface ITagService {
 
 	public void update(Tag model) throws TradesPeopleServiceException ;
 
+	public List<Tag> getAllTagsByStatus(Byte status) throws TradesPeopleServiceException;
+	
+	public List<Tag> getTagsByName(String name) throws TradesPeopleServiceException;
+
+	Tag  getTagById(Long id) throws TradesPeopleServiceException;
+
 }

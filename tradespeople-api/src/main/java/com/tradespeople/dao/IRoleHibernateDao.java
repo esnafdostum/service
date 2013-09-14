@@ -16,4 +16,8 @@ public interface IRoleHibernateDao {
 
 	List<Role> listRoles(PaginationSearchCriteria searchCriteria) throws TradesPeopleDaoException;
 
+	List<Role> getAllRoles() throws TradesPeopleDaoException;
+	
+	List<Role> getAllRolesByStatus(Byte status) throws TradesPeopleDaoException;
+
 }

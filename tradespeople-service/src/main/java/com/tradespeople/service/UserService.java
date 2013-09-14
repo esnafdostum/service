@@ -20,15 +20,15 @@ public class UserService implements IUserService {
 	@Autowired
 	private IUserHibernateDao userDao;
 	
-	@Transactional(readOnly=true)
-	public List<User> all()  throws TradesPeopleServiceException{
-		try {
-			return userDao.listUsers();
-		} catch (TradesPeopleDaoException e) {
-			throw new TradesPeopleServiceException(e);
-		}
-		
-	}
+//	@Transactional(readOnly=true)
+//	public List<User> all()  throws TradesPeopleServiceException{
+//		try {
+//			return userDao.listUsers();
+//		} catch (TradesPeopleDaoException e) {
+//			throw new TradesPeopleServiceException(e);
+//		}
+//		
+//	}
 
 	@Transactional
 	public void create(User user)throws TradesPeopleServiceException {
@@ -110,6 +110,26 @@ public class UserService implements IUserService {
 	public List<User> all(PaginationSearchCriteria searchCriteria) throws TradesPeopleServiceException {
 		try {
 			return userDao.listUsers(searchCriteria);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+	@Override
+	@Transactional
+	public User getUserBy(Long id) throws TradesPeopleServiceException {
+		try {
+			return userDao.getUserBy(id);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+	@Override
+	@Transactional
+	public User getUserBy(String username) throws TradesPeopleServiceException {
+		try {
+			return userDao.getUserBy(username);
 		} catch (TradesPeopleDaoException e) {
 			throw new TradesPeopleServiceException(e);
 		}

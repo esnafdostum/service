@@ -103,6 +103,58 @@ public class ShopTagService implements IShopTagService {
 		}
 	}
 
+
+	@Override
+	public void save(Shoptag shoptag) throws TradesPeopleServiceException {
+		try {
+			shopTagDao.create(shoptag);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+	@Override
+	public void update(Shoptag shoptag) throws TradesPeopleServiceException {
+		try {
+			shopTagDao.update(shoptag);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+
+	@Override
+	@Transactional
+	public List<Shoptag> getShopsTagsByStatus(Shop shop, Byte status)
+			throws TradesPeopleServiceException {
+		try {
+			return shopTagDao.getShopsTagsByStatus(shop, status);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+	@Override
+	@Transactional
+	public List<Shoptag> getShopsTagsByStatus(Tag tag, Byte status)
+			throws TradesPeopleServiceException {
+		try {
+			return shopTagDao.getShopsTagsByStatus(tag, status);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+	@Override
+	@Transactional
+	public Shoptag getShopTagById(Long id) throws TradesPeopleServiceException {
+		try {
+			return shopTagDao.getShopTagById(id);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
 	public void setShopTagDao(IShopTagHibernateDao shopTagDao) {
 		this.shopTagDao = shopTagDao;
 	}
@@ -114,5 +166,7 @@ public class ShopTagService implements IShopTagService {
 	public void setShopTagBuilder(ShopTagBuilder shopTagBuilder) {
 		this.shopTagBuilder = shopTagBuilder;
 	}
+
+	
 
 }

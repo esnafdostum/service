@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.tradespeople.common.api.BaseHibernateDaoSupport;
@@ -16,30 +17,40 @@ public class UserDao extends BaseHibernateDaoSupport implements IUserHibernateDa
 
 	@Override
 	public void create(User user) throws TradesPeopleDaoException {
-		getHibernateTemplate().save(user);
+		try {
+			getSession().save(user);
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e.getMessage());
+		}
 	}
 
 	@Override
 	public void update(User user) throws TradesPeopleDaoException {
-		getHibernateTemplate().update(user);
-		
+		try {
+			getSession().update(user);
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e.getMessage());
+		}
 	}
 
 	@Override
 	public User getUserBy(Long id) throws TradesPeopleDaoException {
-		return getHibernateTemplate().get(User.class, id);
+		try {
+		return (User) getSession().createCriteria(User.class).add(Restrictions.eq("id",id)).uniqueResult();
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e.getMessage());
+		}
 	}
 
 	@Override
 	public User getUserBy(String username) throws TradesPeopleDaoException {
-		Criteria criteria=getSession().createCriteria(User.class);
-		criteria.add(Restrictions.eq("username", username));
-		return (User)criteria.uniqueResult();
+		try {
+			return (User) getSession().createCriteria(User.class).add(Restrictions.eq("username",username)).uniqueResult();
+			} catch (DataAccessException e) {
+				throw new TradesPeopleDaoException(e.getMessage());
 	}
-	
-	public List<User> listUsers() throws TradesPeopleDaoException{
-		return getHibernateTemplate().loadAll(User.class);
 	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override

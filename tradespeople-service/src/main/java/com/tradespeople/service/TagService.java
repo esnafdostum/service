@@ -17,6 +17,7 @@ import com.tradespeople.utils.ApiUtils;
 @Service
 public class TagService implements ITagService{
 	
+	
 	@Autowired
 	private ITagHibernateDao dao;
 
@@ -49,6 +50,39 @@ public class TagService implements ITagService{
 			new TradesPeopleServiceException(e);
 		}
 		return new ArrayList<Tag>();
+	}
+
+
+	@Override
+	@Transactional
+	public List<Tag> getAllTagsByStatus(Byte status)
+			throws TradesPeopleServiceException {
+		try {
+			return dao.getAllTagsByStatus(status);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+	@Override
+	@Transactional
+	public List<Tag> getTagsByName(String name)
+			throws TradesPeopleServiceException {
+		try {
+			return dao.getTagsByName(name);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+	@Override
+	@Transactional
+	public Tag getTagById(Long id) throws TradesPeopleServiceException {
+		try {
+			return dao.getTagById(id);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
 	}
 
 	public void setDao(ITagHibernateDao dao) {

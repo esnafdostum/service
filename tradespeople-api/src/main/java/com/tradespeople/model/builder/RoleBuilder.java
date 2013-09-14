@@ -1,11 +1,15 @@
 package com.tradespeople.model.builder;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.tradespeople.json.request.RoleRequest;
-import com.tradespeople.json.request.RoleResponse;
+import com.tradespeople.json.response.RoleCollectionResponse;
+import com.tradespeople.json.response.RoleResponse;
 import com.tradespeople.model.Role;
+import com.tradespeople.model.Userrole;
 
 @Component
 public class RoleBuilder {
@@ -23,6 +27,11 @@ public class RoleBuilder {
 	
 	public Role buildFor(RoleResponse response){
 		return responseBuilder.build(response);
+	}
+	
+	public RoleCollectionResponse buildFor(List<Userrole> list)
+	{
+		return responseBuilder.build(list);
 	}
 	
 	public RoleRequest buildRequest(Role model){

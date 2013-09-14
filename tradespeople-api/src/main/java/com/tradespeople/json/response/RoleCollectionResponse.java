@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tradespeople.common.api.BaseResponse;
-import com.tradespeople.json.request.RoleResponse;
 
 public class RoleCollectionResponse extends BaseResponse {
 

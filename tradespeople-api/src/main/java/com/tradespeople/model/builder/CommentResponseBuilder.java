@@ -21,7 +21,15 @@ public class CommentResponseBuilder extends ResponseBuilder<CommentResponse, Com
 
 	@Override
 	public CommentResponse build(Comment model) {
-		return null;
+		CommentResponse response=new CommentResponse();
+		
+		response.commenttext=model.getCommenttext();
+		response.createddate=model.getCreateddate();
+		response.id=model.getId();
+		response.shopid=model.getShop().getId();
+		response.status=model.getStatus();
+		response.userid=model.getUser().getId();
+		return response;
 	}
 
 }

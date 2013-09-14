@@ -63,6 +63,7 @@ public class ShopCategoryService implements IShopCategoryService {
 		}
 	}
 	
+	
 	public void setShopCategoryDao(IShopCategoryHibernateDao shopCategoryDao) {
 		this.shopCategoryDao = shopCategoryDao;
 	}
