@@ -6,11 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.tradespeople.common.builder.ResponseBuilder;
-import com.tradespeople.json.response.CommentResponse;
-import com.tradespeople.json.response.UserResponse;
 import com.tradespeople.json.response.UserRoleResponse;
-import com.tradespeople.model.Comment;
-import com.tradespeople.model.User;
 import com.tradespeople.model.Userrole;
 
 

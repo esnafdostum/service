@@ -3,9 +3,7 @@ package com.tradespeople.model.builder;
 import org.springframework.stereotype.Component;
 
 import com.tradespeople.common.builder.RequestBuilder;
-import com.tradespeople.json.request.MediaLookUpRequest;
 import com.tradespeople.json.request.UserRoleRequest;
-import com.tradespeople.model.Medialookup;
 import com.tradespeople.model.Role;
 import com.tradespeople.model.User;
 import com.tradespeople.model.Userrole;

@@ -3,9 +3,6 @@ package com.tradespeople.json.response;
 import java.util.Date;
 
 import com.tradespeople.common.api.BaseResponse;
-import com.tradespeople.model.Media;
-import com.tradespeople.model.Shop;
-import com.tradespeople.model.User;
 
 public class MediaLookUpResponse extends BaseResponse{
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.model.Media;
-import com.tradespeople.model.User;
 
 public interface IMediaHibernateDao {
 

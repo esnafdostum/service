@@ -1,12 +1,10 @@
 package com.tradespeople.model.builder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.tradespeople.common.builder.ResponseBuilder;
-import com.tradespeople.json.response.RoleCollectionResponse;
 import com.tradespeople.json.response.UserCollectionResponse;
 import com.tradespeople.json.response.UserResponse;
 import com.tradespeople.model.User;

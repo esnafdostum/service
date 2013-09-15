@@ -3,8 +3,6 @@ package com.tradespeople.json.request;
 import java.util.Date;
 
 import com.tradespeople.common.api.BaseRequest;
-import com.tradespeople.model.Role;
-import com.tradespeople.model.User;
 
 public class UserRoleRequest extends BaseRequest {
 

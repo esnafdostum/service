@@ -1,17 +1,10 @@
 package com.tradespeople.model.builder;
 
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import com.tradespeople.common.builder.RequestBuilder;
-import com.tradespeople.json.request.MediaLookUpRequest;
 import com.tradespeople.json.request.MediaRequest;
-import com.tradespeople.json.response.MediaCollectionResponse;
-import com.tradespeople.json.response.MediaResponse;
 import com.tradespeople.model.Media;
-import com.tradespeople.model.Medialookup;
-import com.tradespeople.model.User;
 
 
 @Component

@@ -3,7 +3,6 @@ package com.tradespeople.json.response;
 import java.math.BigDecimal;
 
 import com.tradespeople.common.api.BaseResponse;
-import com.tradespeople.model.Shopcategory;
 
 public class ShopResponse extends BaseResponse {
 

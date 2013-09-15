@@ -4,9 +4,6 @@ import java.util.List;
 
 import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.model.Shop;
-import com.tradespeople.model.Shopcategory;
-import com.tradespeople.model.User;
-import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 
 public interface IShopHibernateDao {
 

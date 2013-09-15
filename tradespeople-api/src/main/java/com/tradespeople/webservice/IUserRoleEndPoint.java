@@ -4,7 +4,6 @@ package com.tradespeople.webservice;
 import java.util.List;
 
 import com.tradespeople.common.api.BaseResponse;
-import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.json.request.RoleRequest;
 import com.tradespeople.json.response.RoleCollectionResponse;
 import com.tradespeople.json.response.UserCollectionResponse;

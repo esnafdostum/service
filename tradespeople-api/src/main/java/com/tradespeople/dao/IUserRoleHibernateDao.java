@@ -3,7 +3,6 @@ package com.tradespeople.dao;
 import java.util.List;
 
 import com.tradespeople.common.exception.TradesPeopleDaoException;
-import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.model.Role;
 import com.tradespeople.model.User;
 import com.tradespeople.model.Userrole;

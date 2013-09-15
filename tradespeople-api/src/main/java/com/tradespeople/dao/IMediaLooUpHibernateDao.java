@@ -3,7 +3,6 @@ package com.tradespeople.dao;
 import java.util.List;
 
 import com.tradespeople.common.exception.TradesPeopleDaoException;
-import com.tradespeople.model.Media;
 import com.tradespeople.model.Medialookup;
 import com.tradespeople.model.Shop;
 import com.tradespeople.model.User;

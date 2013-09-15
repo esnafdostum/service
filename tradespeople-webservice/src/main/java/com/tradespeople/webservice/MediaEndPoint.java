@@ -12,7 +12,6 @@ import com.tradespeople.common.api.BaseResponse;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.json.request.MediaRequest;
 import com.tradespeople.json.response.MediaCollectionResponse;
-import com.tradespeople.json.response.MediaLookUpCollectionResponse;
 import com.tradespeople.json.response.MediaResponse;
 import com.tradespeople.model.builder.MediaBuilder;
 import com.tradespeople.service.IMediaService;

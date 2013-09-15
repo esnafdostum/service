@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.tradespeople.json.request.UserRequest;
-import com.tradespeople.json.response.RoleCollectionResponse;
 import com.tradespeople.json.response.UserCollectionResponse;
 import com.tradespeople.json.response.UserResponse;
 import com.tradespeople.model.User;
