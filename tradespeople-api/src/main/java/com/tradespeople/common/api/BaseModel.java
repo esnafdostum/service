@@ -31,7 +31,7 @@ public class BaseModel {
 	}
 
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATEDDATE", length = 0)
 	public Date getCreateddate() {
 		return createddate;

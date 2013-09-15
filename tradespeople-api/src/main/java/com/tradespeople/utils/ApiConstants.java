@@ -14,6 +14,18 @@ public class ApiConstants {
 				return Byte.valueOf(statusCode);
 			}
 		}
+		
+		public static enum LogSeverity{
+			ERROR,DEBUG,INFO
+		}
+		
+		public static enum LogOperation{
+			LOGIN,USERCREATE,USERUPDATE
+		}
+		
+		public static enum UserType{
+			ADMIN,NORMAL_USER
+		}
 
 		public static enum ResponseErrorCode {
 			NoError("0"), NotSupportedParameter("1");
