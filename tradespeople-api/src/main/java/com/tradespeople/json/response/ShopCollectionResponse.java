@@ -16,16 +16,6 @@ public class ShopCollectionResponse extends BaseResponse {
 	public void add(ShopResponse shopResponse) {
 		getResponses().add(shopResponse);
 	}
-
-	public ShopCollectionResponse failResponse(String errorMessage) {
-		ShopCollectionResponse response = new ShopCollectionResponse();
-		BaseResponse fail = BaseResponse.fail(errorMessage);
-		response.setResponseStatus(fail.getResponseStatus());
-		response.setErrorCode(fail.getErrorCode());
-		response.setErrorMessage(fail.getErrorMessage());
-		return response;
-	}
-
 	public List<ShopResponse> getResponses() {
 		return responses;
 	}

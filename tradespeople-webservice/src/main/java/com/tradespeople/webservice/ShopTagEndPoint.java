@@ -67,7 +67,7 @@ public class ShopTagEndPoint extends BaseController implements IShopTagEndPoint 
 			}
 			return response;
 		} catch (TradesPeopleServiceException e) {
-			return new ShopCollectionResponse().failResponse(e.getMessage());
+			return BaseResponse.fail(e.getMessage(),ShopCollectionResponse.class);
 		}
 	}
 	

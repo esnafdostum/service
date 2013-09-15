@@ -26,6 +26,11 @@ public class ApiConstants {
 		public static enum UserType{
 			ADMIN,NORMAL_USER
 		}
+		
+		public static enum SearchType{
+			SHOP
+		}
+
 
 		public static enum ResponseErrorCode {
 			NoError("0"), NotSupportedParameter("1");
