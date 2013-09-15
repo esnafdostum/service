@@ -18,7 +18,6 @@ import com.tradespeople.common.api.PaginableRequest;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.json.request.UserRequest;
 import com.tradespeople.json.response.UserCollectionResponse;
-import com.tradespeople.json.response.UserResponse;
 import com.tradespeople.model.User;
 import com.tradespeople.model.builder.UserBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
@@ -35,7 +34,7 @@ public class UserEndPoint extends BaseController implements IUserEndPoint {
 	@Autowired
 	private UserBuilder userBuilder;
 	
-	@RequestMapping("/createUser")
+	@RequestMapping("/create")
 	@ResponseBody
 	public BaseResponse save(@RequestBody UserRequest request){
 		try {
@@ -46,7 +45,7 @@ public class UserEndPoint extends BaseController implements IUserEndPoint {
 		}
 	}
 	
-	@RequestMapping("/updateUser")
+	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResponse update(@RequestBody UserRequest request){
 		try {
@@ -57,7 +56,7 @@ public class UserEndPoint extends BaseController implements IUserEndPoint {
 		}
 	}
 
-	@RequestMapping("/allUser")
+	@RequestMapping("/all")
 	@ResponseBody
 	public UserCollectionResponse  allUser(Locale locale, Model model,HttpServletRequest  request,HttpServletRequest httpResponse ){
 		try {

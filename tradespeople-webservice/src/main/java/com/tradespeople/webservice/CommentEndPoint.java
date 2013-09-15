@@ -20,7 +20,8 @@ import com.tradespeople.model.builder.CommentBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.ICommentService;
 
-@Controller("/comment")
+@Controller
+@RequestMapping("/comment")
 public class CommentEndPoint extends BaseController implements ICommentEndPoint {
 	
 	@Autowired
@@ -29,7 +30,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 	@Autowired
 	private CommentBuilder commentBuilder;
 	
-	@RequestMapping("/createComment")
+	@RequestMapping("/create")
 	@ResponseBody
 	public BaseResponse save(@RequestBody CommentRequest request){
 		try {
@@ -40,7 +41,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 		}
 	}
 	
-	@RequestMapping("/updateComment")
+	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResponse update(@RequestBody CommentRequest request){
 		try {
@@ -51,7 +52,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 		}
 	}
 	
-	@RequestMapping("/deleteComment")
+	@RequestMapping("/delete")
 	@ResponseBody
 	public BaseResponse delete(@RequestBody CommentRequest request){
 		try {
@@ -62,7 +63,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 		}
 	}
 	
-	@RequestMapping("/commentsbyshop/{shopId}")
+	@RequestMapping("/getByShopWithPagination/{shopId}")
 	public CommentCollectionResponse commentsByShop(@RequestBody PaginableRequest request,@PathVariable("shopId") Long shopId){
 		
 		try {
@@ -73,11 +74,11 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 			}
 			return response;
 		} catch (TradesPeopleServiceException e) {
-			return new CommentCollectionResponse().failResponse(e.getMessage());
+			return  BaseResponse.fail(e.getMessage(), CommentCollectionResponse.class);
 		}
 	}
 	
-	@RequestMapping("/commentsbyuser/{userId}")
+	@RequestMapping("/getByUserWithPagination/{userId}")
 	public CommentCollectionResponse commentsByUser(@RequestBody PaginableRequest request,@PathVariable("userId") Long userId){
 		
 		try {
@@ -88,11 +89,11 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 			}
 			return response;
 		} catch (TradesPeopleServiceException e) {
-			return new CommentCollectionResponse().failResponse(e.getMessage());
+			return  BaseResponse.fail(e.getMessage(), CommentCollectionResponse.class);
 		}
 	}
 	
-	@RequestMapping("/commentsbyuserandshop/{userId}/{shopId}")
+	@RequestMapping("/getByUserAndShopWithPagination/{userId}/{shopId}")
 	public CommentCollectionResponse commentsByUserAndShop(@RequestBody PaginableRequest request,@PathVariable("userId") Long userId,@PathVariable("shopId") Long shopId){
 		
 		try {
@@ -103,7 +104,7 @@ public class CommentEndPoint extends BaseController implements ICommentEndPoint 
 			}
 			return response;
 		} catch (TradesPeopleServiceException e) {
-			return new CommentCollectionResponse().failResponse(e.getMessage());
+			return  BaseResponse.fail(e.getMessage(), CommentCollectionResponse.class);
 		}
 	}
 

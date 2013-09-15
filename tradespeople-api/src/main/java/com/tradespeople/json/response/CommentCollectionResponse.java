@@ -17,15 +17,6 @@ public class CommentCollectionResponse extends BaseResponse {
 		responses.add(commentResponse);
 	}
 
-	public CommentCollectionResponse failResponse(String errorMessage) {
-		CommentCollectionResponse response = new CommentCollectionResponse();
-		BaseResponse fail = BaseResponse.fail(errorMessage);
-		response.setResponseStatus(fail.getResponseStatus());
-		response.setErrorCode(fail.getErrorCode());
-		response.setErrorMessage(fail.getErrorMessage());
-		return response;
-	}
-
 	public List<CommentResponse> getResponses() {
 		return responses;
 	}

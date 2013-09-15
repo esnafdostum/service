@@ -1,7 +1,5 @@
 package com.tradespeople.webservice;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,14 +11,14 @@ import com.tradespeople.common.api.BaseController;
 import com.tradespeople.common.api.BaseResponse;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.json.request.ShopRequest;
-import com.tradespeople.json.response.MediaCollectionResponse;
 import com.tradespeople.json.response.ShopCollectionResponse;
 import com.tradespeople.json.response.ShopResponse;
 import com.tradespeople.model.Shop;
 import com.tradespeople.model.builder.ShopBuilder;
 import com.tradespeople.service.IShopService;
 
-@Controller("/shop")
+@Controller
+@RequestMapping("/shop")
 public class ShopEndPoint extends BaseController implements IShopEndPoint {
 
 	@Autowired
@@ -29,8 +27,7 @@ public class ShopEndPoint extends BaseController implements IShopEndPoint {
 	@Autowired
 	private ShopBuilder shopBuilder;
 
-	@Override
-	@RequestMapping("/createShop")
+	@RequestMapping("/create")
 	@ResponseBody
 	public BaseResponse save(@RequestBody ShopRequest request) {
 		try {
@@ -42,8 +39,7 @@ public class ShopEndPoint extends BaseController implements IShopEndPoint {
 		}
 	}
 
-	@Override
-	@RequestMapping("/updateShop")
+	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResponse update(@RequestBody ShopRequest request) {
 		try {
@@ -55,11 +51,9 @@ public class ShopEndPoint extends BaseController implements IShopEndPoint {
 		}
 	}
 
-	@Override
-	@RequestMapping("/getAllShops")
+	@RequestMapping("/all")
 	@ResponseBody
 	public ShopCollectionResponse getAllShops() {
-		// TODO Auto-generated method stub
 		try {
 			return shopBuilder.buildResponse(shopService.getAllShops());
 		} catch (TradesPeopleServiceException e) {
@@ -67,11 +61,9 @@ public class ShopEndPoint extends BaseController implements IShopEndPoint {
 		}
 	}
 
-	@Override
-	@RequestMapping("/getAllShopsByStatus")
+	@RequestMapping("/allByStatus")
 	@ResponseBody
 	public ShopCollectionResponse getAllShopsByStatus(@PathVariable Byte status) {
-		// TODO Auto-generated method stub
 		try {
 			return shopBuilder.buildResponse(shopService
 					.getAllShopsByStatus(status));
@@ -80,11 +72,9 @@ public class ShopEndPoint extends BaseController implements IShopEndPoint {
 		}
 	}
 
-	@Override
-	@RequestMapping("/getShopById")
+	@RequestMapping("/getById")
 	@ResponseBody
 	public ShopResponse getShopById(@PathVariable Long id) {
-		// TODO Auto-generated method stub
 		try {
 			return shopBuilder.buildResponse(shopService.getShopById(id));
 		} catch (TradesPeopleServiceException e) {
@@ -92,11 +82,9 @@ public class ShopEndPoint extends BaseController implements IShopEndPoint {
 		}
 	}
 
-	@Override
-	@RequestMapping("/getShopsByName")
+	@RequestMapping("/getByName")
 	@ResponseBody
 	public ShopCollectionResponse getShopsByName(@PathVariable String name) {
-		// TODO Auto-generated method stub
 		try {
 			return shopBuilder.buildResponse(shopService.getShopsByName(name));
 		} catch (TradesPeopleServiceException e) {
@@ -104,11 +92,9 @@ public class ShopEndPoint extends BaseController implements IShopEndPoint {
 		}
 	}
 
-	@Override
-	@RequestMapping("/getShopsByCity")
+	@RequestMapping("/getByCity")
 	@ResponseBody
 	public ShopCollectionResponse getShopsByCity(@PathVariable String city) {
-		// TODO Auto-generated method stub
 		try {
 			return shopBuilder.buildResponse(shopService.getShopsByCity(city));
 		} catch (TradesPeopleServiceException e) {

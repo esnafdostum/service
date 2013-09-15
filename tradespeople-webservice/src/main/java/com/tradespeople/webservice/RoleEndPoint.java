@@ -19,7 +19,8 @@ import com.tradespeople.model.builder.RoleBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.IRoleService;
 
-@Controller("/role")
+@Controller
+@RequestMapping("/role")
 public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 	
 	@Autowired
@@ -28,7 +29,7 @@ public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 	@Autowired
 	private RoleBuilder roleBuilder;
 	
-	@RequestMapping("/createRole")
+	@RequestMapping("/create")
 	@ResponseBody
 	public BaseResponse save(@RequestBody RoleRequest request){
 		try {
@@ -39,7 +40,7 @@ public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 		}
 	}
 	
-	@RequestMapping("/updateRole")
+	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResponse update(@RequestBody RoleRequest request){
 		try {
@@ -50,7 +51,7 @@ public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 		}
 	}
 	
-	@RequestMapping("/deleteRole")
+	@RequestMapping("/delete")
 	@ResponseBody
 	public BaseResponse delete(@RequestBody RoleRequest request){
 		try {
@@ -61,7 +62,7 @@ public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 		}
 	}
 	
-	@RequestMapping("/listRole")
+	@RequestMapping("/allWithPagination")
 	public RoleCollectionResponse listRole(@RequestBody PaginableRequest request){
 		
 		try {
@@ -72,7 +73,7 @@ public class RoleEndPoint extends BaseController implements IRoleEndPoint {
 			}
 			return response;
 		} catch (TradesPeopleServiceException e) {
-			return new RoleCollectionResponse().failResponse(e.getMessage());
+			return BaseResponse.fail(e.getMessage(), RoleCollectionResponse.class);
 		}
 	}
 

@@ -56,7 +56,11 @@ public class RoleService implements IRoleService {
 	}
 
 	@Transactional
-	private boolean isExistUserWith(Role role) {
+	private boolean isExistUserWith(Role role) throws TradesPeopleDaoException {
+		Integer count=roleHibernateDao.findCountUsersOfRole(role);
+		if (count!=null && count>0) {
+			return true;
+		}
 		return false;
 	}
 

@@ -23,7 +23,8 @@ import com.tradespeople.model.builder.ShopCategoryBuilder;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.IShopCategoryService;
 
-@Controller("/shopcategory")
+@Controller
+@RequestMapping("/shopcategory")
 public class ShopCategoryEndPoint extends BaseController implements IShopCategoryEndPoint {
 
 	@Autowired
@@ -35,7 +36,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 	@Autowired
 	private ShopCategoryBuilder shopCategoryBuilder;
 	
-	@RequestMapping("/createShopCategory")
+	@RequestMapping("/create")
 	@ResponseBody
 	public BaseResponse save(@RequestBody ShopCategoryRequest request){
 		try {
@@ -46,7 +47,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 		}
 	}
 	
-	@RequestMapping("/updateShopCategory")
+	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResponse update(@RequestBody ShopCategoryRequest request){
 		try {
@@ -72,7 +73,7 @@ public class ShopCategoryEndPoint extends BaseController implements IShopCategor
 		}
 	}
 	
-	@RequestMapping("/catrgoryby/{shopId}")
+	@RequestMapping("/categoriesby/{shopId}")
 	public ShopCategoryCollectionResponse categoriesBy(@RequestBody PaginableRequest request,@PathVariable("shopId") Long shopId){
 		
 		try {

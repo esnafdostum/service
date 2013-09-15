@@ -18,7 +18,8 @@ import com.tradespeople.model.User;
 import com.tradespeople.model.builder.MediaLookupBuilder;
 import com.tradespeople.service.IMediaLookUpService;
 
-@Controller("/medialookup")
+@Controller
+@RequestMapping("/medialookup")
 public class MediaLookUpEndPoint extends BaseController implements
 		IMediaLookUpEndPoint {
 
@@ -28,8 +29,7 @@ public class MediaLookUpEndPoint extends BaseController implements
 	@Autowired
 	private MediaLookupBuilder mediaLookupBuilder;
 
-	@Override
-	@RequestMapping("/createMediaLookUp")
+	@RequestMapping("/create")
 	@ResponseBody
 	public BaseResponse create(@RequestBody MediaLookUpRequest medialookup) {
 		try {
@@ -40,8 +40,7 @@ public class MediaLookUpEndPoint extends BaseController implements
 		}
 	}
 
-	@Override
-	@RequestMapping("/updateMediaLookUp")
+	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResponse update(@RequestBody MediaLookUpRequest medialookup) {
 		try {
@@ -52,8 +51,7 @@ public class MediaLookUpEndPoint extends BaseController implements
 		}
 	}
 
-	@Override
-	@RequestMapping("/getMediaLookUpById")
+	@RequestMapping("/getById")
 	@ResponseBody
 	public MediaLookUpResponse getMediaLookupBy(@PathVariable Long id) {
 		try {
@@ -64,8 +62,7 @@ public class MediaLookUpEndPoint extends BaseController implements
 		}
 	}
 
-	@Override
-	@RequestMapping("/getAllMediaLookUp")
+	@RequestMapping("/all")
 	@ResponseBody
 	public MediaLookUpCollectionResponse getAllMediaLookUp() {
 		try {
@@ -76,8 +73,7 @@ public class MediaLookUpEndPoint extends BaseController implements
 		} 
 	}
 
-	@Override
-	@RequestMapping("/getAllMediaLookUpByStatus")
+	@RequestMapping("/getByStatus")
 	@ResponseBody
 	public MediaLookUpCollectionResponse getAllMediaLookUpByStatus(@PathVariable Byte status) {
 		try {
@@ -88,20 +84,17 @@ public class MediaLookUpEndPoint extends BaseController implements
 		}
 	}
 
-	@Override
-	@RequestMapping("/getAllMediaLookUpByUser")
+	@RequestMapping("/getAllByUser")
 	@ResponseBody
 	public MediaLookUpCollectionResponse getAllMediaLookupByUser() {
 		try {
-			return mediaLookupBuilder.buildFor(mediaLookUpService
-					.getAllMediaLookupByUser());
+			return mediaLookupBuilder.buildFor(mediaLookUpService.getAllMediaLookupByUser());
 		} catch (TradesPeopleServiceException e) {
 			return MediaLookUpCollectionResponse.fail(e.getMessage(),MediaLookUpCollectionResponse.class);
 		}
 	}
 
-	@Override
-	@RequestMapping("/getAllMediaLookUpByShop")
+	@RequestMapping("/getAllByShop")
 	@ResponseBody
 	public MediaLookUpCollectionResponse getAllMediaLookUpByShop() {
 		try {
@@ -112,22 +105,19 @@ public class MediaLookUpEndPoint extends BaseController implements
 		}
 	}
 
-	@Override
-	@RequestMapping("/getMediaLookUpByUser")
+	@RequestMapping("/getByUser")
 	@ResponseBody
 	public MediaLookUpCollectionResponse getMediaLookUpByUser(@PathVariable Long userid) {
 		User user = new User();
 		user.setId(userid);
 		try {
-			return mediaLookupBuilder.buildFor(mediaLookUpService
-					.getMediaByLookUpUser(user));
+			return mediaLookupBuilder.buildFor(mediaLookUpService.getMediaByLookUpUser(user));
 		} catch (TradesPeopleServiceException e) {
 			return MediaLookUpCollectionResponse.fail(e.getMessage(),MediaLookUpCollectionResponse.class);
 		}
 	}
 
-	@Override
-	@RequestMapping("/getMediaLookUpByShop")
+	@RequestMapping("/getByShop")
 	@ResponseBody
 	public MediaLookUpCollectionResponse getMediaLookUpByShop(@PathVariable Long shopid) {
 		Shop shop = new Shop();

@@ -125,8 +125,7 @@ public class ShopTagService implements IShopTagService {
 
 	@Override
 	@Transactional
-	public List<Shoptag> getShopsTagsByStatus(Shop shop, Byte status)
-			throws TradesPeopleServiceException {
+	public List<Shoptag> getShopsTagsByStatus(Shop shop, Byte status)throws TradesPeopleServiceException {
 		try {
 			return shopTagDao.getShopsTagsByStatus(shop, status);
 		} catch (TradesPeopleDaoException e) {
@@ -136,8 +135,7 @@ public class ShopTagService implements IShopTagService {
 
 	@Override
 	@Transactional
-	public List<Shoptag> getShopsTagsByStatus(Tag tag, Byte status)
-			throws TradesPeopleServiceException {
+	public List<Shoptag> getShopsTagsByStatus(Tag tag, Byte status)throws TradesPeopleServiceException {
 		try {
 			return shopTagDao.getShopsTagsByStatus(tag, status);
 		} catch (TradesPeopleDaoException e) {

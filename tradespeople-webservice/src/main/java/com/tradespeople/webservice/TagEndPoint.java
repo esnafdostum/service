@@ -29,7 +29,7 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 	@Autowired
 	private TagBuilder tagBuilder;
 	
-	@RequestMapping("/createTag")
+	@RequestMapping("/create")
 	@ResponseBody
 	public BaseResponse save(@RequestBody TagRequest request){
 		try {
@@ -40,7 +40,7 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 		}
 	}
 	
-	@RequestMapping("/updateTag")
+	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResponse update(@RequestBody TagRequest request){
 		try {
@@ -51,7 +51,7 @@ public class TagEndPoint extends BaseController implements ITagEndPoint {
 		}
 	}
 	
-	@RequestMapping("/tags")
+	@RequestMapping("/allwithPagination")
 	@ResponseBody
 	public TagCollectionResponse tags(@RequestBody PaginableRequest paginableRequest){
 		TagCollectionResponse response=new TagCollectionResponse();

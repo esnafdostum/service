@@ -24,9 +24,9 @@ import com.tradespeople.model.builder.UserBuilder;
 import com.tradespeople.model.builder.UserRoleBuilder;
 import com.tradespeople.service.IUserRoleService;
 
-@Controller("/userrole")
-public class UserRoleEndPoint extends BaseController implements
-		IUserRoleEndPoint {
+@Controller
+@RequestMapping("/userrole")
+public class UserRoleEndPoint extends BaseController implements IUserRoleEndPoint {
 
 	@Autowired
 	private IUserRoleService userRoleService;
@@ -41,11 +41,9 @@ public class UserRoleEndPoint extends BaseController implements
 	private UserBuilder userBuilder;
 
 	@Override
-	@RequestMapping("/createUserRole")
+	@RequestMapping("/create")
 	@ResponseBody
-	public BaseResponse create(@RequestBody List<RoleRequest> roleList,@PathVariable Long userid)
-			 {
-
+	public BaseResponse create(@RequestBody List<RoleRequest> roleList,@PathVariable Long userid){
 		try {
 			User user = new User();
 			user.setId(userid);
@@ -68,11 +66,9 @@ public class UserRoleEndPoint extends BaseController implements
 	}
 
 	@Override
-	@RequestMapping("/updateUserRole")
+	@RequestMapping("/update")
 	@ResponseBody
-	public BaseResponse update(@PathVariable Long roleid,@PathVariable Long userid,@PathVariable Byte status)
-			 {
-
+	public BaseResponse update(@PathVariable Long roleid,@PathVariable Long userid,@PathVariable Byte status){
 		try {
 			userRoleService.update(roleid, userid, status);
 			return BaseResponse.successful();
@@ -84,8 +80,7 @@ public class UserRoleEndPoint extends BaseController implements
 	@Override
 	@RequestMapping("/getRoleofUser")
 	@ResponseBody
-	public RoleCollectionResponse getRoleofUser(@PathVariable Long userid)
-			 {
+	public RoleCollectionResponse getRoleofUser(@PathVariable Long userid){
 		User user = new User();
 		user.setId(userid);
 		List<Userrole> list = null;
@@ -95,7 +90,7 @@ public class UserRoleEndPoint extends BaseController implements
 			BaseResponse.fail(e.getMessage(), UserRoleCollectionResponse.class);
 		}
 		return roleBuilder.buildFor(list);
-
+		
 	}
 
 	@Override
@@ -109,38 +104,21 @@ public class UserRoleEndPoint extends BaseController implements
 		try {
 			list = userRoleService.getUserRole(role);
 		} catch (TradesPeopleServiceException e) {
-			// TODO Auto-generated catch block
 			BaseResponse.fail(e.getMessage(), UserRoleCollectionResponse.class);
 		}
 		return userBuilder.buildFor(list);
-	}
-
-	public IUserRoleService getUserRoleService() {
-		return userRoleService;
 	}
 
 	public void setUserRoleService(IUserRoleService userRoleService) {
 		this.userRoleService = userRoleService;
 	}
 
-	public UserRoleBuilder getUserRoleBuilder() {
-		return userRoleBuilder;
-	}
-
 	public void setUserRoleBuilder(UserRoleBuilder userRoleBuilder) {
 		this.userRoleBuilder = userRoleBuilder;
 	}
 
-	public RoleBuilder getRoleBuilder() {
-		return roleBuilder;
-	}
-
 	public void setRoleBuilder(RoleBuilder roleBuilder) {
 		this.roleBuilder = roleBuilder;
-	}
-
-	public UserBuilder getUserBuilder() {
-		return userBuilder;
 	}
 
 	public void setUserBuilder(UserBuilder userBuilder) {

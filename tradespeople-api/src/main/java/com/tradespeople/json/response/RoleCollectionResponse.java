@@ -16,14 +16,4 @@ public class RoleCollectionResponse extends BaseResponse {
 	public void add(RoleResponse commentResponse) {
 		responses.add(commentResponse);
 	}
-
-	public RoleCollectionResponse failResponse(String errorMessage) {
-		RoleCollectionResponse response = new RoleCollectionResponse();
-		BaseResponse fail = BaseResponse.fail(errorMessage);
-		response.setResponseStatus(fail.getResponseStatus());
-		response.setErrorCode(fail.getErrorCode());
-		response.setErrorMessage(fail.getErrorMessage());
-		return response;
-	}
-	
 }

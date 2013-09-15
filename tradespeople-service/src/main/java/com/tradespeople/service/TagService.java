@@ -1,6 +1,5 @@
 package com.tradespeople.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +46,8 @@ public class TagService implements ITagService{
 		try {
 			return dao.listTags(searchCriteria);
 		} catch (TradesPeopleDaoException e) {
-			new TradesPeopleServiceException(e);
+			throw new TradesPeopleServiceException(e);
 		}
-		return new ArrayList<Tag>();
 	}
 
 

@@ -28,8 +28,7 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	private MediaBuilder mediaBuilder;
 
 	
-	@Override
-	@RequestMapping("/createMedia")
+	@RequestMapping("/create")
 	@ResponseBody
 	public BaseResponse create(@RequestBody MediaRequest media) {
 		try {
@@ -40,8 +39,7 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 		}
 	}
 
-	@Override
-	@RequestMapping("/updateMedia")
+	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResponse update(@RequestBody MediaRequest media) {
 		try {
@@ -52,10 +50,9 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 		}
 	}
 
-	@Override
-	@RequestMapping("/getMediaById")
+	@RequestMapping("/getById/{id}")
 	@ResponseBody
-	public MediaResponse getMediaBy(@PathVariable Long id) {
+	public MediaResponse getMediaBy(@PathVariable("id") Long id) {
 		try {
 			return mediaBuilder.buildResponse(mediaService.getMediaBy(id));
 		} catch (TradesPeopleServiceException e) {
@@ -64,7 +61,7 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	}
 
 	@Override
-	@RequestMapping("/getAllMedia")
+	@RequestMapping("/all")
 	@ResponseBody
 	public MediaCollectionResponse getAllMedia() {
 		try {
@@ -75,7 +72,7 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	}
 
 	@Override
-	@RequestMapping("/getAllMediaByStatus/{status}")
+	@RequestMapping("/getAllByStatus/{status}")
 	@ResponseBody
 	public MediaCollectionResponse getAllMediaByStatus(@PathVariable("status") Byte status) {
 		try {
@@ -86,7 +83,7 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	}
 
 	@Override
-	@RequestMapping("/getAllMediaByType/{type}")
+	@RequestMapping("/getAllByType/{type}")
 	@ResponseBody
 	public MediaCollectionResponse getAllMediaByType(@PathVariable("type") String type) {
 		try {
@@ -97,7 +94,7 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	}
 
 	@Override
-	@RequestMapping("/getAllMediaByTypeAndStatus/{type}/{status}")
+	@RequestMapping("/getAllByTypeAndStatus/{type}/{status}")
 	@ResponseBody
 	public MediaCollectionResponse getAllMediaByType(@PathVariable("type") String type,@PathVariable("status") String status) {
 		try {

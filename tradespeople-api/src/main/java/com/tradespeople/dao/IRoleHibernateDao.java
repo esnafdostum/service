@@ -20,4 +20,6 @@ public interface IRoleHibernateDao {
 	
 	List<Role> getAllRolesByStatus(Byte status) throws TradesPeopleDaoException;
 
+	Integer findCountUsersOfRole(Role role) throws TradesPeopleDaoException;
+
 }

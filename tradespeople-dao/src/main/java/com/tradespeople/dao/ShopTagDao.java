@@ -80,8 +80,7 @@ public class ShopTagDao extends BaseHibernateDaoSupport implements IShopTagHiber
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Shoptag> getShopsTagsByStatus(Shop shop, Byte status)
-			throws TradesPeopleDaoException {
+	public List<Shoptag> getShopsTagsByStatus(Shop shop, Byte status)throws TradesPeopleDaoException {
 		try {
 			return getSession().createCriteria(Shoptag.class)
 					.add(Restrictions.eq("shop", shop))
@@ -95,8 +94,7 @@ public class ShopTagDao extends BaseHibernateDaoSupport implements IShopTagHiber
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Shoptag> getShopsTagsByStatus(Tag tag, Byte status)
-			throws TradesPeopleDaoException {
+	public List<Shoptag> getShopsTagsByStatus(Tag tag, Byte status)throws TradesPeopleDaoException {
 		try {
 			return getSession().createCriteria(Shoptag.class)
 					.add(Restrictions.eq("tag", tag))
@@ -120,7 +118,11 @@ public class ShopTagDao extends BaseHibernateDaoSupport implements IShopTagHiber
 
 	@Override
 	public void update(Shoptag shoptag) throws TradesPeopleDaoException {
-		// TODO Auto-generated method stub
+		try {
+			getHibernateTemplate().update(shoptag);
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e);
+		}
 		
 	}
 
