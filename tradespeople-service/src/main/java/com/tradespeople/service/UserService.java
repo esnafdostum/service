@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tradespeople.common.annotation.TradesPeopleLogger;
 import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.dao.IUserHibernateDao;
 import com.tradespeople.model.User;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
+import com.tradespeople.utils.ApiConstants.Enums.LogOperation;
+import com.tradespeople.utils.ApiConstants.Enums.LogSeverity;
 import com.tradespeople.utils.ApiUtils;
 import com.tradespeople.utils.CipherUtils;
 import com.tradespeople.validators.LengthValidator;
@@ -143,6 +146,7 @@ public class UserService implements IUserService {
 
 	@Override
 	@Transactional
+	@TradesPeopleLogger(Description="",LogOperation=LogOperation.LOGIN,LogSeverity=LogSeverity.DEBUG)
 	public User login(String username, byte[] pass)throws TradesPeopleServiceException {
          try {
 			User user=userDao.getUserBy(username);
