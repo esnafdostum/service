@@ -2,6 +2,7 @@ package com.tradespeople.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.tradespeople.common.api.BaseHibernateDaoSupport;
 import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.model.Media;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 
 @Repository
 public class MediaDao extends BaseHibernateDaoSupport implements IMediaHibernateDao {
@@ -34,10 +36,11 @@ public class MediaDao extends BaseHibernateDaoSupport implements IMediaHibernate
 	@Override
 	public Media getMediaBy(Long id) throws TradesPeopleDaoException {
 		try {
-			return (Media) getSession().createCriteria(Media.class).add(Restrictions.eq("id",id)).uniqueResult();
-			} catch (DataAccessException e) {
-				throw new TradesPeopleDaoException(e.getMessage());
-			}
+			return (Media) getSession().createCriteria(Media.class)
+					.add(Restrictions.eq("id", id)).uniqueResult();
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e.getMessage());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -45,44 +48,64 @@ public class MediaDao extends BaseHibernateDaoSupport implements IMediaHibernate
 	public List<Media> getAllMedia() throws TradesPeopleDaoException {
 		try {
 			return getSession().createCriteria(Media.class).list();
-			} catch (DataAccessException e) {
-				throw new TradesPeopleDaoException(e.getMessage());
-			}
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e.getMessage());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Media> getAllMediaByStatus(Byte status) throws TradesPeopleDaoException {
+	public List<Media> getAllMediaByStatus(Byte status)throws TradesPeopleDaoException {
 		try {
-			return getSession().createCriteria(Media.class).add(Restrictions.eq("status",status)).list();
-			} catch (DataAccessException e) {
-				throw new TradesPeopleDaoException(e.getMessage());
-			}
+			return getSession().createCriteria(Media.class)
+					.add(Restrictions.eq("status", status)).list();
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e.getMessage());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Media> getAllMediaByType(String type)
-			throws TradesPeopleDaoException {
+	public List<Media> getAllMediaByType(String type)throws TradesPeopleDaoException {
 		try {
-			return getSession().createCriteria(Media.class).add(Restrictions.eq("type",type)).list();
-			} catch (DataAccessException e) {
-				throw new TradesPeopleDaoException(e.getMessage());
-			}
+			return getSession().createCriteria(Media.class)
+					.add(Restrictions.eq("type", type)).list();
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e.getMessage());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Media> getAllMediaByType(String type, String status)
-			throws TradesPeopleDaoException {
+	public List<Media> getAllMediaByType(String type, String status)throws TradesPeopleDaoException {
 		try {
-			return  getSession().createCriteria(Media.class)
-					.add(Restrictions.eq("type",type))
-					.add(Restrictions.eq("status",status))
-					.list();
-			} catch (DataAccessException e) {
-				throw new TradesPeopleDaoException(e.getMessage());
-			}
+			return getSession().createCriteria(Media.class)
+					.add(Restrictions.eq("type", type))
+					.add(Restrictions.eq("status", status)).list();
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e.getMessage());
+		}
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Media> getAllMedia(PaginationSearchCriteria searchCriteria)throws TradesPeopleDaoException {
+		try {
+			return createPaginationCriteria(Media.class, searchCriteria).list();
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Media> getAllMediaByStatus(PaginationSearchCriteria searchCriteria, Byte status)throws TradesPeopleDaoException {
+		try {
+			Criteria criteria=createPaginationCriteria(Media.class, searchCriteria);
+			return criteria.add(Restrictions.eq("status", status)).list();
+		} catch (DataAccessException e) {
+			throw new TradesPeopleDaoException(e.getMessage());
+		}
+	}
+
 }

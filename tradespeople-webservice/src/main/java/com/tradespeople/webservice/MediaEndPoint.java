@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tradespeople.common.api.BaseController;
 import com.tradespeople.common.api.BaseResponse;
+import com.tradespeople.common.api.PaginableRequest;
 import com.tradespeople.common.exception.TradesPeopleServiceException;
 import com.tradespeople.json.request.MediaRequest;
 import com.tradespeople.json.response.MediaCollectionResponse;
 import com.tradespeople.json.response.MediaResponse;
 import com.tradespeople.model.builder.MediaBuilder;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.service.IMediaService;
 
 @Controller
@@ -62,9 +64,9 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	@Override
 	@RequestMapping("/all")
 	@ResponseBody
-	public MediaCollectionResponse getAllMedia() {
+	public MediaCollectionResponse getAllMedia(@RequestBody PaginableRequest paginableRequest) {
 		try {
-			return mediaBuilder.buildFor(mediaService.getAllMedia());
+			return mediaBuilder.buildFor(mediaService.getAllMedia(PaginationSearchCriteria.buildFor(paginableRequest)));
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage(),MediaCollectionResponse.class);
 		}
@@ -73,9 +75,9 @@ public class MediaEndPoint extends BaseController implements IMediaEndPoint {
 	@Override
 	@RequestMapping("/getAllByStatus/{status}")
 	@ResponseBody
-	public MediaCollectionResponse getAllMediaByStatus(@PathVariable("status") Byte status) {
+	public MediaCollectionResponse getAllMediaByStatus(@RequestBody PaginableRequest paginableRequest,@PathVariable("status") Byte status) {
 		try {
-			return mediaBuilder.buildFor(mediaService.getAllMediaByStatus(status));
+			return mediaBuilder.buildFor(mediaService.getAllMediaByStatus(PaginationSearchCriteria.buildFor(paginableRequest),status));
 		} catch (TradesPeopleServiceException e) {
 			return BaseResponse.fail(e.getMessage(),MediaCollectionResponse.class);
 		}

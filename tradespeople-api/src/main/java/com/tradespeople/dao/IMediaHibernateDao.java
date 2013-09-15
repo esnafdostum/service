@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tradespeople.common.exception.TradesPeopleDaoException;
 import com.tradespeople.model.Media;
+import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 
 public interface IMediaHibernateDao {
 
@@ -20,4 +21,8 @@ public interface IMediaHibernateDao {
 	List<Media> getAllMediaByType(String type) throws TradesPeopleDaoException;
 	
 	List<Media> getAllMediaByType(String type,String status) throws TradesPeopleDaoException;
+
+	List<Media> getAllMedia(PaginationSearchCriteria searchCriteria) throws TradesPeopleDaoException;
+
+	List<Media> getAllMediaByStatus(PaginationSearchCriteria searchCriteria,Byte status) throws TradesPeopleDaoException;
 }
