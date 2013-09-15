@@ -150,9 +150,7 @@ public class UserService implements IUserService {
 				ApiUtils.throwWrongUserNameException();
 			}
 			String password=CipherUtils.decrypt(user.getPassword());
-			if (password.equals(String.valueOf(pass))) {
-				return user;
-			}else{
+			if (!password.equals(String.valueOf(pass))) {
 				ApiUtils.throwWrongPasswordException();
 			}
 			return user;
