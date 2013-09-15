@@ -11,6 +11,10 @@ public class ApiUtils {
 	private static final String NOT_PERSISTED_ERROR_TEXT="Persisted Object can't create .";
 	private static final String USER_HASTO_HAVEANY_ROLE_ERROR_TEXT="Users have to have any roles.";
 	private static final String SAME_USER_NAME_ERROR_TEXT = "User Name exists in the system";
+	private static final String WRONG_USERNAME_ERROR_TEXT = "User Name is wrong";
+	private static final String WRONG_PASSWORD_ERROR_TEXT = "User Password is wrong";
+	private static final String PASSWORD_LENGTH_ERROR_TEXT = "Password lenght must be 8";
+	private static final String REQUIRED_FIELD_ERROR_TEXT = "Required field must be fill";
 	
 	public static void throwPersistedException() throws TradesPeopleServiceException{
 		 throw new TradesPeopleServiceException(PERSISTED_ERROR_TEXT);
@@ -35,6 +39,22 @@ public class ApiUtils {
 	public static void throwSameUserNameObligationException()  throws TradesPeopleServiceException{
 		throw new TradesPeopleServiceException(SAME_USER_NAME_ERROR_TEXT);
 		
+	}
+
+	public static void throwWrongUserNameException() throws TradesPeopleServiceException{
+		throw new TradesPeopleServiceException(WRONG_USERNAME_ERROR_TEXT);		
+	}
+
+	public static void throwWrongPasswordException() throws TradesPeopleServiceException {
+		throw new TradesPeopleServiceException(WRONG_PASSWORD_ERROR_TEXT);			
+	}
+
+	public static void throwPasswordLengthRestrictionException() throws TradesPeopleServiceException {
+		throw new TradesPeopleServiceException(PASSWORD_LENGTH_ERROR_TEXT);			
+	}
+
+	public static void throwRequiredFieldException() throws TradesPeopleServiceException{
+		throw new TradesPeopleServiceException(REQUIRED_FIELD_ERROR_TEXT);			
 	}
 
 }

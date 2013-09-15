@@ -13,6 +13,9 @@ import com.tradespeople.dao.IUserHibernateDao;
 import com.tradespeople.model.User;
 import com.tradespeople.searchcriteria.PaginationSearchCriteria;
 import com.tradespeople.utils.ApiUtils;
+import com.tradespeople.utils.CipherUtils;
+import com.tradespeople.validators.LengthValidator;
+import com.tradespeople.validators.RequiredStringValidator;
 
 @Service
 public class UserService implements IUserService {
@@ -20,16 +23,6 @@ public class UserService implements IUserService {
 	@Autowired
 	private IUserHibernateDao userDao;
 	
-//	@Transactional(readOnly=true)
-//	public List<User> all()  throws TradesPeopleServiceException{
-//		try {
-//			return userDao.listUsers();
-//		} catch (TradesPeopleDaoException e) {
-//			throw new TradesPeopleServiceException(e);
-//		}
-//		
-//	}
-
 	@Transactional
 	public void create(User user)throws TradesPeopleServiceException {
 		try {
@@ -42,14 +35,27 @@ public class UserService implements IUserService {
 			if (isExistUserName(user.getUsername(),user.getId())) {
 				ApiUtils.throwSameUserNameObligationException();
 			}
+			
+			validatePassword(user);
+			
 			user.setCreateddate(new Date());
 			user.setToken(generateUniqueUserToken(user));
+			user.setPassword(CipherUtils.encrypt(user.getPassword()));
 			userDao.create(user);
 		} catch (TradesPeopleDaoException e) {
 			throw new TradesPeopleServiceException(e);
 		}
 	}
 	
+	private void validatePassword(User user) throws TradesPeopleServiceException {
+		if (!new RequiredStringValidator(user.getPassword()).validate()) {
+			ApiUtils.throwRequiredFieldException();
+		}
+		if (!new LengthValidator(user.getPassword(),8).validate()) {
+			ApiUtils.throwPasswordLengthRestrictionException();
+		}
+	}
+
 	@Transactional(readOnly=true)
 	private boolean isExistUserName(String username,Long id) throws TradesPeopleDaoException {
 		User user =userDao.getUserBy(username);
@@ -130,6 +136,26 @@ public class UserService implements IUserService {
 	public User getUserBy(String username) throws TradesPeopleServiceException {
 		try {
 			return userDao.getUserBy(username);
+		} catch (TradesPeopleDaoException e) {
+			throw new TradesPeopleServiceException(e);
+		}
+	}
+
+	@Override
+	@Transactional
+	public User login(String username, byte[] pass)throws TradesPeopleServiceException {
+         try {
+			User user=userDao.getUserBy(username);
+			if (user==null) {
+				ApiUtils.throwWrongUserNameException();
+			}
+			String password=CipherUtils.decrypt(user.getPassword());
+			if (password.equals(String.valueOf(pass))) {
+				return user;
+			}else{
+				ApiUtils.throwWrongPasswordException();
+			}
+			return user;
 		} catch (TradesPeopleDaoException e) {
 			throw new TradesPeopleServiceException(e);
 		}

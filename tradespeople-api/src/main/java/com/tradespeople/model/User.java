@@ -8,6 +8,7 @@ import java.util.List;
 
 
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -225,6 +226,11 @@ public class User extends BaseModel implements java.io.Serializable {
 
 	private boolean isNotExistsUserRoleFor(Role role) {
 		return !userRoles().contains(role);
+	}
+
+	public boolean isSamePassword(String password2) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
